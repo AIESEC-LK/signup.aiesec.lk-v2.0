@@ -7,11 +7,11 @@ import  GlobalTeacher from './components/GlobalTeacher'
 function App() {
   return (
     <div className="App">
-      <Routes>
-        {/* <Route path="/" element={<SignUp />} /> */}
-        <Route path="/" element={<GlobalTeacher />} />
-        <Route path="/global-teacher-register" element={<GlobalTeacher />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<SignUp />} />
+          <Route path="/globalTeacher" element={<GlobalTeacher />} />
+          <Route path="/global-teacher-register" element={<GlobalTeacher />} />
+        </Routes>
     </div>
   );
 }

@@ -4,8 +4,10 @@ import vol from "../assets/volunteer.png";
 import int from "../assets/intern.png";
 import teach from "../assets/Teach.png";
 import aiesec from "../assets/aiesec.png";
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();
   return (
     <div className="relative w-full">
       <div
@@ -50,7 +52,11 @@ function SignUp() {
             </div>
           </div>
 
-          <div className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
+          <div onClick={ 
+            () => {
+              navigate('/globalTeacher');
+            }
+           } className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
             <img src={teach} alt="Teach" className="w-full h-64 object-cover"/>
             <div className="bg-[#F48924] text-white text-center p-2">
               <div className="font-bold text-2xl">Teach</div>
