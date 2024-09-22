@@ -14,7 +14,7 @@ function SignUp() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}
       ></div>
-      
+      <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative z-10 min-h-screen">
         <div className="w-full h-7 bg-[#037EF3]"></div>
 
