@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GTeLogo from '../assets/GTe.png';
+import GVLogo from '../assets/GV.png';
 import alignment from '../assets/alignment.json';
 
 const SignUpForm = () => {
@@ -82,7 +82,7 @@ const SignUpForm = () => {
                 referral_type: formData.howFoundUs || "Other",
                 allow_phone_communication: formData.permission,
                 allow_email_communication: formData.permission,
-                selected_programmes: [8],
+                selected_programmes: [7],
             },
         };
 
@@ -134,10 +134,10 @@ const SignUpForm = () => {
         <div className="min-h-screen flex items-center justify-center text-white">
             <form onSubmit={handleSubmit} className="bg-white p-8 pt-4 rounded-lg shadow-md w-full max-w-[80%] md:max-w-[50%]">
                 <div className='flex flex-row border-b border-b-black py-4 my-6 justify-between items-center'>
-                    <h1 className='text-black text:xl md:text-2xl font-semibold'>Global Teacher</h1>
-                    <img src={GTeLogo} alt="" className='w-18 h-12' />
+                    <h1 className='text-black text:xl md:text-2xl font-semibold'>Global Volunteer</h1>
+                    <img src={GVLogo} alt="" className='w-18 h-12' />
                 </div>
-                <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700 mt-3">Sign up for Global Teacher</h2>
+                <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700 mt-3">Sign up for Global Volunteer</h2>
                 <p className="text-gray-500 mb-4 text-center max-w-50%">Please note that your information is secure with us. We prioritize your privacy and handle 
                     all information with the highest security standards.
                 </p>
