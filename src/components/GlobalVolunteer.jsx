@@ -6,7 +6,7 @@ import back from '../assets/back.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Modal = ({ onClose }) => (
-    <div className="fixed inset-0 bg-orange-500 flex items-center justify-center">
+    <div className="fixed inset-0 bg-red-500 flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
             <h2 className="text-2xl text-black font-semibold mb-4">Thank you for signing up!</h2>
             <p className="text-black mb-6">One of our team members will contact you soon.</p>
@@ -48,15 +48,6 @@ const SignUpForm = () => {
         });
     };
 
-    // const handleSuggestionClick = (suggestion) => {
-    //     setSuggestions([]);
-    //     setInputValue(suggestion.name); 
-    //     setFormData({
-    //         ...formData,
-    //         alignmentName: suggestion, 
-    //     });
-        
-    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,7 +63,6 @@ const SignUpForm = () => {
             return;
         }
         const lead_alignment_id = alignment.find(item => item.name === formData.alignmentName)?.id || 1821;
-
 
         const payload = {
             user: {
@@ -119,7 +109,7 @@ const SignUpForm = () => {
 
     return (
         <div className="">
-            <div className='bg-amber-500 h-3 mb-6'>
+            <div className='bg-red-500 h-3 mb-6'>
             </div>
             <div className='ml-6 mr-6 mb-6'>
                 <div className='flex justify-between'>
@@ -140,13 +130,13 @@ const SignUpForm = () => {
                             <label className="block md:w-full md:pr-2 md:mr-10 ">
                                 <span className="block font-bold text-m text-gray-700 mb-2">First Name:</span>
                                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required 
-                                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                    className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
                             <label className="block md:w-full md:pl-2">
                                 <span className="block font-bold text-m text-gray-700 mb-2">Last Name:</span>
                                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required 
-                                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                    className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
                         </div>
 
@@ -156,13 +146,13 @@ const SignUpForm = () => {
                             <label className="block md:w-1/2 md:pr-2 md:mr-10 ">
                                 <span className="block font-bold text-m text-gray-700 mb-2 ">Email:</span>
                                 <input type="email" name="email" value={formData.email} onChange={handleChange} required 
-                                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                    className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
                             <label className="block md:w-1/2 md:pl-2 ">
                                 <span className="block font-bold text-m text-gray-700 mb-2">Contact Number:</span>
                                     <input type="tel" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required 
-                                        className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                        className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
                         </div>
 
@@ -206,7 +196,7 @@ const SignUpForm = () => {
                             <label className="block flex-1 md:mr-10">
                                 <span className="block font-bold text-m text-gray-700 mb-2 ">Password:</span>
                                 <input type="password" name="password" value={formData.password} onChange={handleChange} required 
-                                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                    className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
                             <label className="md:block flex-1">
@@ -234,7 +224,7 @@ const SignUpForm = () => {
                                 name="permission" 
                                 checked={formData.permission} 
                                 onChange={handleChange} 
-                                className="mr-2 h-4  text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "
+                                className="focus:outline-none mr-2 h-4  text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "
                             />
                             <span className="text-sm text-gray-700">
                                 I give permission to be contacted by phone/email.
@@ -244,7 +234,7 @@ const SignUpForm = () => {
 
                     <button 
                         type="submit" 
-                        className="mt-6 px-5 bg-gray-400  py-2 rounded-lg text-black font-bold hover:bg-orange-400 transition duration-300 ease-in-out"
+                        className="mt-6 px-5 bg-gray-400  py-2 rounded-lg text-black font-bold hover:bg-red-400 transition duration-300 ease-in-out"
                     >
                         Submit
                     </button>
