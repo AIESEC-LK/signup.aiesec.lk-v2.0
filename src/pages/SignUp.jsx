@@ -4,8 +4,10 @@ import vol from "../assets/volunteer.png";
 import int from "../assets/intern.png";
 import teach from "../assets/Teach.png";
 import aiesec from "../assets/aiesec.png";
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();
   return (
     <div className="relative w-full">
       <div
@@ -33,8 +35,14 @@ function SignUp() {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-7 mt-8 sm:mt-14">
-          <div className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
+        <div  className="flex flex-wrap justify-center gap-7 mt-8 sm:mt-14">
+          <div
+            onClick={
+              () => {
+                navigate('/globalVolunteer');
+              }
+            }
+           className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
             <img src={int} alt="Intern" className="w-full h-64 object-cover"/>
             <div className="bg-[#F85A40] text-white text-center p-2">
               <div className="font-bold text-2xl">Volunteer</div>
@@ -42,7 +50,11 @@ function SignUp() {
             </div>
           </div>
 
-          <div className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
+          <div onClick={ 
+            () => {
+              navigate('/globalTalent');
+            }
+           } className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
             <img src={vol} alt="Volunteer" className="w-full h-64 object-cover"/>
             <div className="bg-[#0CB9C1] text-white text-center p-2">
               <div className="font-bold text-2xl">Intern</div>
@@ -50,7 +62,11 @@ function SignUp() {
             </div>
           </div>
 
-          <div className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
+          <div onClick={ 
+            () => {
+              navigate('/globalTeacher');
+            }
+           } className="w-64 bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-110">
             <img src={teach} alt="Teach" className="w-full h-64 object-cover"/>
             <div className="bg-[#F48924] text-white text-center p-2">
               <div className="font-bold text-2xl">Teach</div>
