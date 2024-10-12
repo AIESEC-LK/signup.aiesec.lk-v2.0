@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GVLogo from '../assets/GV.png';
 import alignment from '../assets/alignment.json';
-import back from '../assets/back.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Modal = ({ onClose }) => (
@@ -117,13 +116,10 @@ const SignUpForm = () => {
             <div className='bg-red-500 h-3 mb-6'>
             </div>
             <div className='ml-6 mr-6 mb-6'>
-                <div className='flex justify-between'>
-                    <img src={back} 
-                        onClick={() => navigate('/')}
-                    className=' h-8 mt-2 md:mt-0 md:h-12 hover:cursor-pointer' ></img>
-                    <div className=' font-bold text-black text-lg md:text-3xl mt-3'>Sign Up Form</div>
-                    <img src={GVLogo} className=' h-7 mt-3 md:mt-0 md:h-14' alt="" />
+                <div className='flex justify-center'>
+                    <div className=' font-bold text-black text-lg md:text-3xl mt-3'>Sign Up Form</div>                    
                 </div>
+                <img src={GVLogo} className=' h-7 mt-3 md:mt-0 md:h-14 fixed top-10 right-6' alt="" />
             </div>
             <div className='flex w-full justify-center   items-center md:mt-20'>
 

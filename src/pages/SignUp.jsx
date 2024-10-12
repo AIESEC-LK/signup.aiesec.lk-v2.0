@@ -79,7 +79,7 @@ function SignUp() {
           <img src={aiesec} className='w-52' alt="" />
         </div>
         <div className="final text-center text-[#828282] pb-7">
-          Made with Love 💗 by &lt;Dev.Team&gt; of AIESEC in Sri Lanka
+          Made with Love 💗 by &lt;/Dev.Team&gt; of AIESEC in Sri Lanka
         </div>
       </div>
     </div>
