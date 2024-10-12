@@ -120,7 +120,7 @@ const SignUpForm = () => {
                 <div className='flex justify-center'>
                     <div className=' font-bold text-black text-lg md:text-3xl mt-3'>Sign Up Form</div>                    
                 </div>
-                <img src={GVLogo} className=' h-7 mt-3 md:mt-0 md:h-14 fixed top-10 right-6' alt="" />
+                <img src={GVLogo} className=' h-7 mt-3 md:mt-0 md:h-14 absolute top-10 right-6' alt="" />
             </div>
             <div className='flex w-full justify-center   items-center md:mt-20'>
 
