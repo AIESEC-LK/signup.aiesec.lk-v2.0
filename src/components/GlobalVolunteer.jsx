@@ -48,22 +48,21 @@ const SignUpForm = () => {
         });
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!formData.permission) {
             alert('Please give permission to reach out by phone/email.');
             return;
         }
-
+    
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
         if (!passwordRegex.test(formData.password)) {
             alert('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
             return;
         }
+        
         const lead_alignment_id = alignment.find(item => item.name === formData.alignmentName)?.id || 1821;
-
         const payload = {
             user: {
                 first_name: formData.firstName,
@@ -80,29 +79,35 @@ const SignUpForm = () => {
                 selected_programmes: [7],
             },
         };
-
+    
         try {
+    
             const res = await axios.post('https://auth.aiesec.org/users.json', payload, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
+    
+            console.log('Signup response:', res);
+            setShowModal(true);  
+    
             await axios.post('http://localhost:3000/api/email', {
-              email: payload.user.email,
-              name : payload.user.first_name + ' ' + payload.user.last_name
+                email: payload.user.email,
+                name: payload.user.first_name + ' ' + payload.user.last_name,
             }, {
-              headers: {
-                'Content-Type': 'application/json',
-              },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
-
-            setShowModal(true);
+            console.log("Email notification sent!");
+    
         } catch (error) {
-            console.error('There was an error!', error);
+            console.error('Error during form submission:', error); 
+    
             if (error.response?.data?.errors?.email[0] === 'has already been taken') {
                 setErrorMessage('The email address has already been taken. Please try again with a different email address.');
             } else {
-                setErrorMessage('An error occurred while submitting the form. Please try again.');
+                setErrorMessage('An error occurred while submitting the form. Please try again.' + error.response?.data?.errors?.email[0]);
             }
         }
     };
@@ -158,7 +163,7 @@ const SignUpForm = () => {
 
                         <div className="md:flex flex-1 space-x-4">
                             <label className="block flex-1 md:mr-10">
-                                <span className="block font-bold text-m text-gray-700 mb-2">Alignment Name:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">University / Institute:</span>
                                 <select
                                     name="alignmentName"
                                     value={formData.alignmentName}
@@ -166,7 +171,7 @@ const SignUpForm = () => {
                                     required
                                     className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
                                 >
-                                    <option value="">Select Alignment</option>
+                                    <option value="">Select University</option>
                                     {alignment.map(item => (
                                         <option key={`${item.id}-${item.name}-${item['data-id']}`} value={item.name}>
                                             {item.name}
@@ -240,7 +245,9 @@ const SignUpForm = () => {
                     </button>
                 </form>
             </div>
-            {showModal && <Modal onClose={() => setShowModal(false)} />}
+            {showModal && <Modal onClose={() =>{setShowModal(false) 
+            navigate('/')}
+        }/>}
         </div>
     );
 };
