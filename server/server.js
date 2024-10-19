@@ -12,24 +12,7 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Sample endpoint for form submission
-// app.post('/api/signup', (req, res) => {
-//     const { firstName, lastName, email, password, contactNumber, howFoundUs, yearOfStudy, permission } = req.body;
-    
-//     // Ideally, you would save the data to a database
-//     console.log({
-//         firstName,
-//         lastName,
-//         email,
-//         password,
-//         contactNumber,
-//         howFoundUs,
-//         yearOfStudy,
-//         permission
-//     });
 
-//     res.status(200).json({ message: 'Signup Successful!' });
-// });
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
