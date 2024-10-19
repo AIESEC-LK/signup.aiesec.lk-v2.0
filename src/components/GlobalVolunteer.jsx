@@ -113,7 +113,7 @@ const SignUpForm = () => {
 
     return (
         <div className="">
-            <div className='bg-red-500 h-3 mb-6'>
+            <div className='bg-red-500 h-5 mb-6'>
             </div>
             <div className='ml-6 mr-6 mb-6'>
                 <div className='flex justify-center'>

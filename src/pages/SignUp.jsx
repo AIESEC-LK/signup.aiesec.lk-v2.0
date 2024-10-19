@@ -15,7 +15,7 @@ function SignUp() {
         style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}
       ></div>
 
-      <div className="w-full h-7 bg-[#037EF3]"
+      <div className="w-full h-5 bg-[#037EF3]"
         style={{
           position: window.innerWidth > 822 ? 'fixed' : 'static',
           top: window.innerWidth > 822 ? '0' : 'auto',
