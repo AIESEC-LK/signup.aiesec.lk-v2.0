@@ -138,7 +138,7 @@ const SignUpForm = () => {
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
-                            <label className="block md:w-full md:pl-2">
+                            <label className="block md:w-full md:pl-2 mt-5 md:mt-0">
                                 <span className="block font-bold text-m text-gray-700 mb-2">Last Name:</span>
                                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required 
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
@@ -154,7 +154,7 @@ const SignUpForm = () => {
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
-                            <label className="block md:w-1/2 md:pl-2 ">
+                            <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0">
                                 <span className="block font-bold text-m text-gray-700 mb-2">Contact Number:</span>
                                     <input type="tel" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required 
                                         className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
