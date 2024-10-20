@@ -37,7 +37,11 @@ const SignUpForm = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false); 
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -196,8 +200,23 @@ const SignUpForm = () => {
                         <div className="md:flex flex-1 space-x-4">
                             <label className="block flex-1 md:mr-10">
                                 <span className="block font-bold text-m text-gray-700 mb-2 ">Password:</span>
-                                <input type="password" name="password" value={formData.password} onChange={handleChange} required 
-                                    className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
+                                <div className="relative">
+                                    <input 
+                                        type={passwordVisible ? 'text' : 'password'} 
+                                        name="password" 
+                                        value={formData.password} 
+                                        onChange={handleChange} 
+                                        required 
+                                        className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={togglePasswordVisibility}
+                                        className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
+                                    >
+                                        {passwordVisible ? 'Hide' : 'Show'}
+                                    </button>
+                                </div>                            
                             </label>
 
                             <label className="md:block flex-1">
