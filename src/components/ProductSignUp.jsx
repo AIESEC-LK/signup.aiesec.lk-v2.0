@@ -71,6 +71,12 @@ const ProductSignUp = (props) => {
             alert('Please give permission to reach out by phone/email.');
             return;
         }
+
+        const contactNumberRegex = /^[0-9]{9,10}$/;
+        if (!contactNumberRegex.test(formData.contactNumber)) {
+            alert('Please enter a valid 10-digit contact number. In the format: 0712345678');
+            return;
+        }
     
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
         if (!passwordRegex.test(formData.password)) {
