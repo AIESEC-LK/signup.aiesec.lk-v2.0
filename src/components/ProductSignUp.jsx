@@ -26,7 +26,18 @@ const Modal = ({ onClose, product }) => {
     );
 };
 
-
+const queryAlignments = {
+    "cs": 1340,
+    "cc" :222,
+    "usj":221,
+    "kandy":2204,
+    "ruhuna":2175,
+    "sliit": 2188,
+    "rajarata": 5490,
+    "nibm":4535,
+    "nsbm": 2186,
+    // "cn":
+}
 
 const ProductSignUp = (props) => {
     const navigate = useNavigate();
@@ -34,6 +45,11 @@ const ProductSignUp = (props) => {
     const queryParams = new URLSearchParams(location.search);
     var EY = queryParams.get("EY");
     EY = EY ?? "Main";
+    if (EY !== "Main") {
+        EY = queryAlignments[EY];
+    }
+    
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -158,13 +174,13 @@ const ProductSignUp = (props) => {
                     <div className="space-y-4">
                         <div className='md:flex md:flex-row justify-between w-full'>
                             <label className="block md:w-full md:pr-2 md:mr-10 ">
-                                <span className="block font-bold text-m text-gray-700 mb-2">First Name:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">First Name:*</span>
                                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required 
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
                             <label className="block md:w-full md:pl-2 mt-5 md:mt-0">
-                                <span className="block font-bold text-m text-gray-700 mb-2">Last Name:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">Last Name:*</span>
                                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required 
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
@@ -174,13 +190,13 @@ const ProductSignUp = (props) => {
 
                         <div className='md:flex'>
                             <label className="block md:w-1/2 md:pr-2 md:mr-10 ">
-                                <span className="block font-bold text-m text-gray-700 mb-2 ">Email:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2 ">Email:*</span>
                                 <input type="email" name="email" value={formData.email} onChange={handleChange} required 
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
                             <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0">
-                                <span className="block font-bold text-m text-gray-700 mb-2">Contact Number:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">Contact Number:*</span>
                                     <input type="tel" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required 
                                         className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
@@ -190,7 +206,7 @@ const ProductSignUp = (props) => {
 
                             {EY === "Main" &&
                             <label className="block flex-1 md:mr-10">
-                                <span className="block font-bold text-m text-gray-700 mb-2">University / Institute:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">University / Institute:*</span>
                                 <select
                                     name="alignmentName"
                                     value={formData.alignmentName}
@@ -207,7 +223,7 @@ const ProductSignUp = (props) => {
                                 </select>
                             </label>
                             }
-                            <label className={`flex-1 block`}>
+                            <label className='flex-1 md:block'>
                                 <span className="block font-bold text-m text-gray-700 mb-2">Year of Study:</span>
                                 <select
                                     name="yearOfStudy"
@@ -226,7 +242,7 @@ const ProductSignUp = (props) => {
                         </div>
                         <div className="md:flex flex-1 space-x-4">
                             <label className="block flex-1 md:mr-10">
-                                <span className="block font-bold text-m text-gray-700 mb-2 ">Password:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2 ">Password:*</span>
                                 <div className="relative">
                                     <input 
                                         type={passwordVisible ? 'text' : 'password'} 
@@ -243,11 +259,13 @@ const ProductSignUp = (props) => {
                                     >
                                         {passwordVisible ? 'Hide' : 'Show'}
                                     </button>
-                                </div>                                    
+                                </div>
+                                <div className='text-black text-xs mt-2'>Password must be at least 8 characters long including a lowercase & uppercase letters, numbers, and special characters.</div>
+                                    
                             </label>
 
                             <label className="md:block flex-1">
-                                <span className="block font-bold text-m text-gray-700 mb-2">How did you find us:</span>
+                                <span className="block font-bold text-m text-gray-700 mb-2">How did you find us:*</span>
                                 <select
                                     name="howFoundUs"
                                     value={formData.howFoundUs}

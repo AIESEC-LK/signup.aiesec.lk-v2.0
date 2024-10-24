@@ -92,8 +92,10 @@ function SignUp() {
         <div className="flex justify-center">
           <img src={aiesec} className="w-52 mb-4" alt="" />
         </div>
-        <div className="final text-center text-xs  sm:text-base font-extralight	 text-[#828282] pb-7">
-          Made with Love 💗 by &lt;/Dev.Team&gt; <br className='sm:hidden' />   of AIESEC in Sri Lanka
+        <div className="final text-center text-[12px] sm:text-base font-extralight text-[#828282] pb-7">
+          Made with Love 💗 by &lt;/Dev.Team&gt; 
+          {/* <br className="sm:hidden" />  */}
+          of AIESEC in Sri Lanka
         </div>
       </div>
     </div>
