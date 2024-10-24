@@ -36,7 +36,7 @@ const queryAlignments = {
     "rajarata": 5490,
     "nibm":4535,
     "nsbm": 2186,
-    // "cn":
+    "cn": 872
 }
 
 const ProductSignUp = (props) => {
