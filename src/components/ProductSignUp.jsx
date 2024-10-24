@@ -1,28 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GVLogo from '../assets/GTe.png';
+import GVLogo from '../assets/GV.png';
+import GTeLogo from '../assets/GTe.png';
+import GT from '../assets/GT.png';
 import alignment from '../assets/alignment.json';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-const Modal = ({ onClose }) => (
-    <div className="fixed inset-0 bg-amber-500 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
-            <h2 className="text-2xl text-black font-semibold mb-4">Thank you for signing up!</h2>
-            <p className="text-black mb-6">One of our team members will contact you soon.</p>
-            <button 
-                onClick={onClose} 
-                className="bg-white  shadow-2xl text-black  font-semibold py-2 px-8 rounded hover:bg-gray-100 transition duration-300"
-            >
-                Close
-            </button>
+
+const Modal = ({ onClose, product }) => {
+    const modalBgClass = product === 'GV' ? 'bg-red-500' : product === 'GTe' ? 'bg-amber-500' : 'bg-red-500';
+    return (
+        <div className={`fixed inset-0 ${modalBgClass} flex items-center justify-center`}>
+            <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
+                <h2 className="text-2xl text-black font-semibold mb-4">Thank you for signing up!</h2>
+                <p className="text-black mb-6">One of our team members will contact you soon.</p>
+                <button 
+                    onClick={onClose} 
+                    className="bg-white shadow-2xl text-black font-semibold py-2 px-8 rounded hover:bg-gray-100 transition duration-300"
+                >
+                    Close
+                </button>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 
 
-const SignUpForm = () => {
+const ProductSignUp = (props) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    var EY = queryParams.get("EY");
+    EY = EY ?? "Main";
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -32,13 +43,14 @@ const SignUpForm = () => {
         howFoundUs: '',
         yearOfStudy: '',
         permission: false,
-        alignmentName: '', 
+        alignmentName: EY !== "Main" ? EY : '', 
     });
+
+    const ProductLogo = props.product === 'GV' ? GVLogo : props.product === 'GTe' ? GTeLogo : props.product === 'GTa' ? GT : null;
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false); 
-
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
@@ -50,6 +62,7 @@ const SignUpForm = () => {
             [name]: type === 'checkbox' ? checked : value,
         });
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,22 +77,28 @@ const SignUpForm = () => {
             alert('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
             return;
         }
-        
-        const lead_alignment_id = alignment.find(item => item.name === formData.alignmentName)?.id || 1821;
+        var lead_alignment_id;
+        if (EY === "Main") {
+            lead_alignment_id = alignment.find(item => item.name === formData.alignmentName)?.id || 1821;
+        }else{
+            lead_alignment_id = EY;
+        }
+        const selectedProgramme = props.product === 'GV' ? 7 : props.product === 'GTe' ? 8 : props.product === 'GTa' ? 9 : null;
+
         const payload = {
             user: {
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                email: formData.email,
-                country_code: "+94",
-                phone: formData.contactNumber,
-                password: formData.password,
-                alignment_id: lead_alignment_id,
-                lc: lead_alignment_id,
-                referral_type: formData.howFoundUs || "Other",
-                allow_phone_communication: formData.permission,
-                allow_email_communication: formData.permission,
-                selected_programmes: [8],
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            country_code: "+94",
+            phone: formData.contactNumber,
+            password: formData.password,
+            alignment_id: lead_alignment_id,
+            lc: lead_alignment_id,
+            referral_type: formData.howFoundUs || "Other",
+            allow_phone_communication: formData.permission,
+            allow_email_communication: formData.permission,
+            selected_programmes: [selectedProgramme],
             },
         };
     
@@ -117,13 +136,13 @@ const SignUpForm = () => {
 
     return (
         <div className="">
-            <div className='bg-amber-500 h-5 mb-6'>
-            </div>
+            <div className={`${props.product === "GTa" ? 'bg-cyan-500' : props.product === "GV" ? 'bg-red-500' : props.product === "GTe" ? 'bg-amber-500' : ''} h-5 mb-6`}></div>            
             <div className='ml-6 mr-6 mb-6'>
                 <div className='flex justify-center'>
                     <div className=' font-bold text-black text-lg md:text-3xl mt-3'>Sign Up Form</div>                    
                 </div>
-                <img src={GVLogo} className=' h-7 mt-3 md:mt-0 md:h-14 absolute top-10 right-6' alt="" />
+
+                <img src={ProductLogo} className=' h-7 mt-3 md:mt-0 md:h-14 absolute top-10 right-6' alt="" />
             </div>
             <div className='flex w-full justify-center   items-center md:mt-20'>
 
@@ -154,7 +173,7 @@ const SignUpForm = () => {
                                     className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
                             </label>
 
-                            <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0 ">
+                            <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0">
                                 <span className="block font-bold text-m text-gray-700 mb-2">Contact Number:</span>
                                     <input type="tel" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required 
                                         className="focus:outline-none mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"/>
@@ -162,6 +181,8 @@ const SignUpForm = () => {
                         </div>
 
                         <div className="md:flex flex-1 space-x-4">
+
+                            {EY === "Main" &&
                             <label className="block flex-1 md:mr-10">
                                 <span className="block font-bold text-m text-gray-700 mb-2">University / Institute:</span>
                                 <select
@@ -179,8 +200,8 @@ const SignUpForm = () => {
                                     ))}
                                 </select>
                             </label>
-
-                            <label className="md:block flex-1">
+                            }
+                            <label className={`flex-1 block`}>
                                 <span className="block font-bold text-m text-gray-700 mb-2">Year of Study:</span>
                                 <select
                                     name="yearOfStudy"
@@ -216,7 +237,7 @@ const SignUpForm = () => {
                                     >
                                         {passwordVisible ? 'Hide' : 'Show'}
                                     </button>
-                                </div>                            
+                                </div>                                    
                             </label>
 
                             <label className="md:block flex-1">
@@ -254,15 +275,18 @@ const SignUpForm = () => {
 
                     <button 
                         type="submit" 
-                        className="mt-6 px-5 bg-gray-400  py-2 rounded-lg text-black font-bold hover:bg-orange-400 transition duration-300 ease-in-out"
+                        className="mt-6 px-5 bg-gray-400  py-2 rounded-lg text-black font-bold hover:bg-cyan-400 transition duration-300 ease-in-out"
                     >
                         Submit
                     </button>
                 </form>
             </div>
-            {showModal && <Modal onClose={() => setShowModal(false)} />}
+            {showModal && <Modal product={props.product} onClose={() =>{ setShowModal(false)
+            navigate('/')
+            }
+            } />}
         </div>
     );
 };
 
-export default SignUpForm;
+export default ProductSignUp;
