@@ -158,7 +158,7 @@ const ProductSignUp = (props) => {
 
     return (
         <div className="">
-            <div className={`${props.product === "GTa" ? 'bg-cyan-500' : props.product === "GV" ? 'bg-red-500' : props.product === "GTe" ? 'bg-amber-500' : ''} h-5 mb-6`}></div>            
+                <div className={`${props.product === "GTa" ? 'bg-cyan-500' : props.product === "GV" ? 'bg-red-500' : props.product === "GTe" ? 'bg-amber-500' : ''} h-5 mb-6`}></div>            
             <div className='ml-6 mr-6 mb-6'>
                 <div className='flex justify-center'>
                     <div className=' font-bold text-black text-lg md:text-3xl mt-3'>Sign Up Form</div>                    
@@ -299,7 +299,11 @@ const ProductSignUp = (props) => {
 
                     <button 
                         type="submit" 
-                        className="mt-6 px-5 bg-gray-400  py-2 rounded-lg text-black font-bold hover:bg-cyan-400 transition duration-300 ease-in-out"
+                        className={`mt-6 px-5   py-2 rounded-lg text-black font-bold transition duration-300 ease-in-out
+                            ${props.product === "GTa" ? 'bg-cyan-500' : props.product === "GV" ? 'bg-red-500' : props.product === "GTe" ? 'bg-amber-500' : ''}
+                            ${props.product === "GTa" ? 'hover:bg-cyan-800' : props.product === "GV" ? 'hover:bg-red-800' : props.product === "GTe" ? 'hover:bg-amber-800' : ''}
+
+                        `}
                     >
                         Submit
                     </button>
