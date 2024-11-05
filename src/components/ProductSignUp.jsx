@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { TiTick } from "react-icons/ti";
+
 import axios from "axios";
 import GVLogo from "../assets/GV.png";
 import GTeLogo from "../assets/GTe.png";
@@ -6,6 +8,8 @@ import GT from "../assets/GT.png";
 import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useRef } from "react";
+
 
 const Modal = ({ onClose, product }) => {
   const modalBgClass =
@@ -80,12 +84,26 @@ const ProductSignUp = (props) => {
       ? GT
       : null;
 
+  const inputRef = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () => {
+  const [requirementsMet, setRequirementsMet] = useState({
+    charCount: false,
+    case: false,
+    specialChar: false,
+  });
+  const togglePasswordVisibility = (event) => {
+    event.preventDefault();
     setPasswordVisible(!passwordVisible);
+    setTimeout(() => {
+      inputRef.current.focus();
+    }, 0);
   };
+
+
+
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -93,6 +111,15 @@ const ProductSignUp = (props) => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+
+    if (name === "password") {
+      // Update password requirements based on the value
+      setRequirementsMet({
+        charCount: value.length >= 8,
+        case: /[a-z]/.test(value) && /[A-Z]/.test(value),
+        specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -103,21 +130,23 @@ const ProductSignUp = (props) => {
       return;
     }
 
+    // Validate contact number format
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
-      alert(
-        "Please enter a valid 10-digit contact number. In the format: 0712345678"
-      );
+      setErrorMessage("Please enter a valid 10-digit contact number. Format: 0712345678");
       return;
     }
 
+    // Validate password strength
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
     if (!passwordRegex.test(formData.password)) {
-      alert(
+      setErrorMessage(
         "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
       );
       return;
     }
+
+
     var lead_alignment_id;
     if (EY === "Main") {
       lead_alignment_id =
@@ -337,6 +366,7 @@ const ProductSignUp = (props) => {
                   </label>
                 </div>
               ) : (
+                <>
                 <div className="md:flex md:flex-row justify-between w-full ">
                   <label className="block md:w-full md:pr-2 md:mr-10 ">
                     <span className="block font-bold text-m text-gray-700 mb-2">
@@ -356,17 +386,99 @@ const ProductSignUp = (props) => {
                       <option value="4">4nd Year</option>
                     </select>
                   </label>
-                  <div className="block md:w-full md:pl-2 mt-5 md:mt-0"></div>
+                  <div className="block md:w-full md:pl-2 mt-5 md:mt-0">
+                  <label className="md:block flex-1">
+                <span className="block font-bold text-m text-gray-700 mb-2">
+                  How did you find us:*
+                </span>
+                <select
+                  name="howFoundUs"
+                  value={formData.howFoundUs}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="">Select option</option>
+                  <option key="friend" value="Friend">
+                    Friend
+                  </option>
+                  <option key="social_media" value="Social Media">
+                    Social Media
+                  </option>
+                  <option key="other" value="Other">
+                    Other
+                  </option>
+                </select>
+              </label>
+                  </div>
                 </div>
+                <div className="space-y-4">
+               
+<div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
+<label className="block md:w-full md:pr-2 md:mr-10   ">
+{/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
+
+                <span className="block font-bold text-m text-gray-700 mb-2 mt-4 ">
+                  Password:*
+                </span>
+                <div className="relative">
+                  <input
+                   ref={inputRef} 
+                    type={passwordVisible ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                  <button
+                    type="button"
+                      onClick={togglePasswordVisibility}
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
+                  >
+                    {passwordVisible ? "Hide" : "Show"}
+                  </button>
+
+
+
+                  
+                </div>
+             
+              
+  </label>
+  <div className="block md:w-full md:pl-2 mt-5 ">
+ 
+  <div className="text-black text-xs mt-2 items-center  ">
+    <div className="requirements ">
+    <p className="">Password must,</p>
+                  
+                  <ul className="list-disc pl-3 ">
+                  <li className={requirementsMet.charCount ? "met" : ""}>Include at least 8 characters</li>
+                 
+            <li className={requirementsMet.case ? "met" : ""}>Include lowercase & uppercase letters</li>
+            <li className={requirementsMet.specialChar ? "met" : ""}>Include a special character</li>
+                  </ul>
+                </div>
+                </div>
+  </div>
+
+
+  </div>
+  </div>
+</>
+
               )}
             </div>
             <div className="md:flex flex-1 space-x-4">
+              {EY=== "Main" && (
               <label className="block flex-1 md:mr-10">
                 <span className="block font-bold text-m text-gray-700 mb-2 ">
                   Password:*
                 </span>
                 <div className="relative">
                   <input
+                   ref={inputRef} 
+
                     type={passwordVisible ? "text" : "password"}
                     name="password"
                     value={formData.password}
@@ -382,13 +494,19 @@ const ProductSignUp = (props) => {
                     {passwordVisible ? "Hide" : "Show"}
                   </button>
                 </div>
-                <div className="text-black text-xs mt-2">
-                  Password must be at least 8 characters long including a
-                  lowercase & uppercase letters, numbers, and special
-                  characters.
+                <div className="requirements text-xs text-black mt-2 ">
+    <p className="">Password must,</p>
+                  
+                  <ul className="list-disc pl-3  ">
+                  <li className={requirementsMet.charCount ? "met" : ""}> Include at least 8 characters</li>
+                 
+            <li className={requirementsMet.case ? "met" : ""}>Include lowercase & uppercase letters</li>
+            <li className={requirementsMet.specialChar ? "met" : ""}>Include a special character</li>
+                  </ul>
                 </div>
               </label>
-
+              )}
+                {EY === "Main" && (
               <label className="md:block flex-1">
                 <span className="block font-bold text-m text-gray-700 mb-2">
                   How did you find us:*
@@ -412,6 +530,7 @@ const ProductSignUp = (props) => {
                   </option>
                 </select>
               </label>
+                )}
             </div>
 
             <div className="flex items-center">
