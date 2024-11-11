@@ -29,7 +29,7 @@ function SignUp() {
       ></div>
 
       <div
-        className="relative z-10 flex flex-col justify-center items-center min-h-[90vh]"
+        className="relative  flex flex-col justify-center items-center min-h-[90vh]"
         style={{
           paddingTop: window.innerWidth < 822 ? "20px" : "0",
           paddingBottom: window.innerWidth < 822 ? "20px" : "0",
