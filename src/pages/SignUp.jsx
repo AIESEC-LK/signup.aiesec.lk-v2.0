@@ -55,37 +55,37 @@ function SignUp() {
         <div className="flex flex-wrap justify-center gap-7 mt-8 sm:mt-14">
           <div
             onClick={() => navigate("/globalVolunteer")}
-            className="card w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-110"
+            className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
-            <img src={int} alt="Intern" className="w-full h-64 object-cover" />
+            <img src={int} alt="Intern" className="w-full h-48 sm:h-64 object-cover" />
             <div className="bg-[#F85A40] text-white text-center p-2">
-              <div className="font-bold text-2xl">Volunteer</div>
+              <div className="font-bold text-lg sm:text-2xl">Volunteer</div>
               <div>with AIESEC</div>
             </div>
           </div>
 
           <div
             onClick={() => navigate("/globalTalent")}
-            className="card w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-110 delay-75"
+            className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
             <img
               src={vol}
               alt="Volunteer"
-              className="w-full h-64 object-cover"
+              className="w-full h-48 sm:h-64 object-cover"
             />
             <div className="bg-[#0CB9C1] text-white text-center p-2">
-              <div className="font-bold text-2xl">Intern</div>
+              <div className="font-bold text-lg sm:text-2xl">Intern</div>
               <div>with AIESEC</div>
             </div>
           </div>
 
           <div
             onClick={() => navigate("/globalTeacher")}
-            className="card w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-110 delay-150"
+            className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
-            <img src={teach} alt="Teach" className="w-full h-64 object-cover" />
+            <img src={teach} alt="Teach" className="w-full h-48 sm:h-64 object-cover" />
             <div className="bg-[#F48924] text-white text-center p-2">
-              <div className="font-bold text-2xl">Teach</div>
+              <div className="font-bold text-lg sm:text-2xl">Teach</div>
               <div>with AIESEC</div>
             </div>
           </div>
@@ -101,11 +101,10 @@ function SignUp() {
         }}
       >
         <div className="flex justify-center">
-          <img src={aiesec} className="w-52 mb-4" alt="" />
+          <img src={aiesec} className="w-40 sm:w-52 mb-4" alt="" />
         </div>
         <div className="final text-center text-xs md:text-base lg:text-lg font-extralight text-[#828282] pb-7">
           Made with Love 💗 by &lt;/Dev.Team&gt;&nbsp;of AIESEC in Sri Lanka
-          {/* <br className="sm:hidden" />  */}
         </div>
       </div>
     </div>
