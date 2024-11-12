@@ -27,3 +27,18 @@
 .bg-white{
   background-color: white;
 }
+
+
+/* Password requirements met styling */
+.requirements li {
+  color: red;
+}
+
+.requirements li.met {
+  color: green;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
