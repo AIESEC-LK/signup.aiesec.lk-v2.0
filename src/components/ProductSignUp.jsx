@@ -261,7 +261,7 @@ const ProductSignUp = (props) => {
 
           <div className="space-y-4">
             <div className="md:flex md:flex-row justify-between w-full">
-              <label className="block md:w-full md:pr-2 md:mr-10 ">
+              <label className="block md:w-full  md:pr-2 md:mr-10 ">
                 <span className="block font-bold text-m text-gray-700 mb-2">
                   First Name:*
                 </span>
@@ -275,7 +275,7 @@ const ProductSignUp = (props) => {
                 />
               </label>
 
-              <label className="block md:w-full md:pl-2 mt-5 md:mt-0">
+              <label className="block md:w-full  md:pl-2 mt-5 md:mt-0">
                 <span className="block font-bold text-m text-gray-700 mb-2">
                   Last Name:*
                 </span>
@@ -291,7 +291,7 @@ const ProductSignUp = (props) => {
             </div>
 
             <div className="md:flex">
-              <label className="block md:w-1/2 md:pr-2 md:mr-10 ">
+              <label className="block md:w-1/2 md:pr-2 md:mr-10 mt-5 md:mt-0">
                 <span className="block font-bold text-m text-gray-700 mb-2 ">
                   Email:*
                 </span>
@@ -305,7 +305,8 @@ const ProductSignUp = (props) => {
                 />
               </label>
 
-              <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0">
+              {/* <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0"> */}
+              <label className="block md:w-1/2 md:pl-2 mt-5 md:mt-0 ">
                 <span className="block font-bold text-m text-gray-700 mb-2">
                   Contact Number:*
                 </span>
@@ -323,7 +324,7 @@ const ProductSignUp = (props) => {
             <div className="">
               {EY === "Main" ? (
                 <div className="md:flex flex-1 space-x-4">
-                  <label className="block flex-1 md:mr-10">
+                  <label className="md:block flex-1 md:mr-10">
                     <span className="block font-bold text-m text-gray-700 mb-2">
                       University / Institute:*
                     </span>
@@ -368,7 +369,8 @@ const ProductSignUp = (props) => {
               ) : (
                 <>
                 <div className="md:flex md:flex-row justify-between w-full ">
-                  <label className="block md:w-full md:pr-2 md:mr-10 ">
+                  {/* <label className="block md:w-full md:pr-2 md:mr-10 "> */}
+                  <label className="block md:w-full md:pr-2 md:mr-10 mt-5 md:mt-0">
                     <span className="block font-bold text-m text-gray-700 mb-2">
                       Year of Study:
                     </span>
@@ -438,13 +440,7 @@ const ProductSignUp = (props) => {
                   >
                     {passwordVisible ? "Hide" : "Show"}
                   </button>
-
-
-
-                  
                 </div>
-             
-              
   </label>
   <div className="block md:w-full md:pl-2 mt-5 ">
  
