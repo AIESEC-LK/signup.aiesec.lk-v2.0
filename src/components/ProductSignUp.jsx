@@ -6,6 +6,8 @@ import GT from "../assets/GT.png";
 import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { CheckCircleIcon } from "@heroicons/react/16/solid";
+import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
 const SuccessModal = ({ onClose }) => {
 
@@ -24,9 +26,16 @@ const SuccessModal = ({ onClose }) => {
       className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
+
+        <center>
+        
+        <CheckCircleIcon  className="size-20 text-green-500 mb-4"/>
+        </center>
+
         <h1 className="text-3xl text-green-500 font-semibold mb-4">
           Success!
         </h1>
+         
         <h2 className="text-2xl text-black font-semibold mb-4">
           Thank you for signing.
         </h2>
@@ -43,6 +52,7 @@ const SuccessModal = ({ onClose }) => {
     </div>
   );
 };
+
 
 
 const FailModal = ({ onClose, messageTitle, messageContent }) => {
@@ -62,6 +72,12 @@ const FailModal = ({ onClose, messageTitle, messageContent }) => {
       className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
+
+        <center>
+        
+        <ExclamationTriangleIcon  className="size-20 text-red-500 mb-4"/>
+        </center>
+        
         <h1 className="text-3xl text-red-500 font-semibold mb-4">
           Error!
         </h1>
