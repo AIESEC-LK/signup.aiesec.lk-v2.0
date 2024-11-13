@@ -9,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import { CheckCircleIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
+
+// Displays after submitting the form
 const SuccessModal = ({ onClose }) => {
 
   useEffect(() => {
@@ -26,10 +28,8 @@ const SuccessModal = ({ onClose }) => {
       className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
-
-        <center>
-        
-        <CheckCircleIcon  className="size-20 text-green-500 mb-4"/>
+        <center>      
+          <CheckCircleIcon  className="size-20 text-green-500 mb-4"/>
         </center>
 
         <h1 className="text-3xl text-green-500 font-semibold mb-4">
@@ -54,7 +54,7 @@ const SuccessModal = ({ onClose }) => {
 };
 
 
-
+// Displays after getting an error
 const FailModal = ({ onClose, messageTitle, messageContent }) => {
 
   useEffect(() => {
@@ -72,15 +72,14 @@ const FailModal = ({ onClose, messageTitle, messageContent }) => {
       className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
+        <center>       
+          <ExclamationTriangleIcon  className="size-20 text-red-500 mb-4"/>
+        </center>   
 
-        <center>
-        
-        <ExclamationTriangleIcon  className="size-20 text-red-500 mb-4"/>
-        </center>
-        
         <h1 className="text-3xl text-red-500 font-semibold mb-4">
           Error!
         </h1>
+        
         <h2 className="text-2xl text-black font-semibold mb-4">
           {messageTitle}
         </h2>
@@ -145,7 +144,6 @@ const ProductSignUp = (props) => {
       ? GT
       : null;
 
-  const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
   const [messageTitle, setMessageTitle] = useState("");
@@ -210,6 +208,7 @@ const ProductSignUp = (props) => {
         last_name: formData.lastName,
         email: formData.email,
         country_code: "+94",
+        //phone: formData.contactNumber,
         contact_number: formData.contactNumber,
         password: formData.password,
         alignment_id: lead_alignment_id,
@@ -221,7 +220,7 @@ const ProductSignUp = (props) => {
       
     };
 
-    console.log("Payload:", payload);
+    //console.log("Payload:", payload);
 
     try {
       const res = await axios.post(
@@ -236,7 +235,7 @@ const ProductSignUp = (props) => {
       );
 
       console.log("Signup response:", res);
-      setShowSuccessModal(true);
+      setShowSuccessModal(true); // please comment this line after testing
 /*
       await axios.post(
         "http://localhost:3000/api/email",
@@ -250,23 +249,19 @@ const ProductSignUp = (props) => {
           },
         }
       );
-      console.log("Email notification sent!");*/
+      console.log("Email notification sent!");
+      setShowSuccessModal(true);
+      */
     } catch (error) {
       //console.error("Error during form submission:", error);
 
       if (error.response?.data?.errors?.email[0] === "has already been taken") {
-        //setErrorMessage(
-          //"The email address has already been taken. Please try again with a different email address."
-        //);
+
 
       setMessageTitle("Already registered.");
       setMessageContent("The email address has already been taken. Please try again with a different email address.");
       setShowFailedModal(true);
       } else {
-        //setErrorMessage(
-          //"An error occurred while submitting the form. Please try again." +
-            //error.response?.data?.errors?.email[0]
-        //);
         setMessageTitle("Network error.");
       setMessageContent("An error occurred while submitting the form. Please try again.");
       setShowFailedModal(true);
@@ -305,9 +300,6 @@ const ProductSignUp = (props) => {
           onSubmit={handleSubmit}
           className="bg-white p-8 pt-4 rounded-lg  w-full max-w-[80%] md:max-w-[80%]"
         >
-          {errorMessage && (
-            <p className="text-red-500 text-center">{errorMessage}</p>
-          )}
 
           <div className="space-y-4">
             <div className="md:flex md:flex-row justify-between w-full">
