@@ -79,7 +79,7 @@ const FailModal = ({ onClose, messageTitle, messageContent }) => {
         <h1 className="text-3xl text-red-500 font-semibold mb-4">
           Error!
         </h1>
-        
+
         <h2 className="text-2xl text-black font-semibold mb-4">
           {messageTitle}
         </h2>
@@ -234,7 +234,7 @@ const ProductSignUp = (props) => {
         }
       );
 
-      console.log("Signup response:", res);
+      //console.log("Signup response:", res);
       setShowSuccessModal(true); // please comment this line after testing
 /*
       await axios.post(
@@ -256,15 +256,15 @@ const ProductSignUp = (props) => {
       //console.error("Error during form submission:", error);
 
       if (error.response?.data?.errors?.email[0] === "has already been taken") {
+        setMessageTitle("Already registered.");
+        setMessageContent("The email address has already been taken. Please try again with a different email address.");
+        setShowFailedModal(true);
 
-
-      setMessageTitle("Already registered.");
-      setMessageContent("The email address has already been taken. Please try again with a different email address.");
-      setShowFailedModal(true);
       } else {
         setMessageTitle("Network error.");
-      setMessageContent("An error occurred while submitting the form. Please try again.");
-      setShowFailedModal(true);
+        setMessageContent("An error occurred while submitting the form. Please try again.");
+        setShowFailedModal(true);
+        
       }
     }
   };
