@@ -7,27 +7,35 @@ import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-const Modal = ({ onClose, product }) => {
-  const modalBgClass =
-    product === "GV"
-      ? "bg-red-500"
-      : product === "GTe"
-      ? "bg-amber-500"
-      : "bg-red-500";
+const SuccessModal = ({ onClose }) => {
+
+  useEffect(() => {
+    // Disable scrolling when the modal is open
+    document.body.style.overflow = 'hidden';
+
+    // Re-enable scrolling when the modal is closed
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <div
-      className={`fixed inset-0 ${modalBgClass} flex items-center justify-center`}
+      className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}
     >
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
+        <h1 className="text-3xl text-green-500 font-semibold mb-4">
+          Success!
+        </h1>
         <h2 className="text-2xl text-black font-semibold mb-4">
-          Thank you for signing up!
+          Thank you for signing.
         </h2>
         <p className="text-black mb-6">
           One of our team members will contact you soon.
         </p>
         <button
           onClick={onClose}
-          className="bg-white shadow-2xl text-black font-semibold py-2 px-8 rounded hover:bg-gray-100 transition duration-300"
+          className="bg-green-500 shadow-2xl text-white font-semibold py-2 px-8 rounded hover:bg-gray-100 transition duration-300"
         >
           Close
         </button>
@@ -81,7 +89,7 @@ const ProductSignUp = (props) => {
       : null;
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -136,12 +144,11 @@ const ProductSignUp = (props) => {
         : null;
 
     const payload = {
-      user: {
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email,
         country_code: "+94",
-        phone: formData.contactNumber,
+        contact_number: formData.contactNumber,
         password: formData.password,
         alignment_id: lead_alignment_id,
         lc: lead_alignment_id,
@@ -149,12 +156,15 @@ const ProductSignUp = (props) => {
         allow_phone_communication: formData.permission,
         allow_email_communication: formData.permission,
         selected_programmes: [selectedProgramme],
-      },
+      
     };
+
+    console.log("Payload:", payload);
 
     try {
       const res = await axios.post(
-        "https://auth.aiesec.org/users.json",
+       // "https://auth.aiesec.org/users.json",
+       "http://localhost:3000/api/users",
         payload,
         {
           headers: {
@@ -164,8 +174,8 @@ const ProductSignUp = (props) => {
       );
 
       console.log("Signup response:", res);
-      setShowModal(true);
-
+      setShowSuccessModal(true);
+/*
       await axios.post(
         "http://localhost:3000/api/email",
         {
@@ -178,7 +188,7 @@ const ProductSignUp = (props) => {
           },
         }
       );
-      console.log("Email notification sent!");
+      console.log("Email notification sent!");*/
     } catch (error) {
       console.error("Error during form submission:", error);
 
@@ -430,7 +440,7 @@ const ProductSignUp = (props) => {
 
           <button
             type="submit"
-            className={`mt-6 px-5   py-2 rounded-lg text-black font-bold transition duration-300 ease-in-out
+            className={`mt-6 px-5   py-2 rounded-lg text-white font-bold transition duration-300 ease-in-out
                             ${
                               props.product === "GTa"
                                 ? "bg-cyan-500"
@@ -456,11 +466,11 @@ const ProductSignUp = (props) => {
           </button>
         </form>
       </div>
-      {showModal && (
-        <Modal
+      {showSuccessModal && (
+        <SuccessModal
           product={props.product}
           onClose={() => {
-            setShowModal(false);
+            setShowSuccessModal(false);
             navigate("/");
           }}
         />
