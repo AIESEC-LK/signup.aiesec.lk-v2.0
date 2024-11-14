@@ -546,7 +546,7 @@ const ProductSignUp = (props) => {
             className="mt-6 mx-2 px-5 py-2 rounded-lg text-white font-bold transition duration-300 ease-in-out bg-gray-500 hover:bg-gray-700"
             onClick={handleReset}
             >
-              Reset form
+              Clear form
             </button>
         </form>
       </div>
