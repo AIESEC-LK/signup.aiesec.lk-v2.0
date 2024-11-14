@@ -161,6 +161,20 @@ const ProductSignUp = (props) => {
     });
   };
 
+  const handleReset = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      contactNumber: "",
+      howFoundUs: "",
+      yearOfStudy: "",
+      permission: false,
+      alignmentName: EY !== "Main" ? EY : "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -178,6 +192,8 @@ const ProductSignUp = (props) => {
       setShowFailedModal(true);
       return;
     }
+
+  
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
     if (!passwordRegex.test(formData.password)) {
@@ -525,6 +541,13 @@ const ProductSignUp = (props) => {
           >
             Submit
           </button>
+          <button
+            type="reset"
+            className="mt-6 mx-2 px-5 py-2 rounded-lg text-white font-bold transition duration-300 ease-in-out bg-gray-500 hover:bg-gray-700"
+            onClick={handleReset}
+            >
+              Reset form
+            </button>
         </form>
       </div>
       {showSuccessModal && (
