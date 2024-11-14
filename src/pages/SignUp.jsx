@@ -57,7 +57,7 @@ function SignUp() {
             onClick={() => navigate("/globalVolunteer")}
             className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
-            <img src={int} alt="Intern" className="w-full h-48 sm:h-64 object-cover" />
+            <img src={vol} alt="Volunteer" className="w-full h-48 sm:h-64 object-cover" />
             <div className="bg-[#F85A40] text-white text-center p-2">
               <div className="font-bold text-lg sm:text-2xl">Volunteer</div>
               <div>with AIESEC</div>
@@ -69,8 +69,8 @@ function SignUp() {
             className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
             <img
-              src={vol}
-              alt="Volunteer"
+              src={int}
+              alt="Intern"
               className="w-full h-48 sm:h-64 object-cover"
             />
             <div className="bg-[#0CB9C1] text-white text-center p-2">
