@@ -240,8 +240,8 @@ const ProductSignUp = (props) => {
 
     try {
       const res = await axios.post(
-       // "https://auth.aiesec.org/users.json",
-       "http://localhost:3000/api/users",
+       //"https://auth.aiesec.org/users.json", // use this for testing
+       "http://localhost:3000/api/users",   // use this for production
         payload,
         {
           headers: {
@@ -251,7 +251,7 @@ const ProductSignUp = (props) => {
       );
 
       //console.log("Signup response:", res);
-      setShowSuccessModal(true); // please comment this line after testing
+     // setShowSuccessModal(true); // please comment this line after testing
 
       await axios.post(
         "http://localhost:3000/api/email",
