@@ -79,7 +79,7 @@ app.post('/api/email', (req, res) => {
 /** Please remove this database connection during the production */
 
 /* ######################### TEST DATABASE CONNECTION ################################## */
-
+/*
 // MySQL database connection
 const db = mysql.createConnection({
     host: 'localhost',
@@ -156,7 +156,7 @@ app.get('/api/users', (req, res) => {
         res.status(200).json({ message: 'Users retrieved successfully', data: results });
     });
 });
-
+*/
 
 /* ################### TEST DATABASE CONNECTION ################################## */
 

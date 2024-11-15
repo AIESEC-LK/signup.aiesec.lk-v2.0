@@ -13,7 +13,7 @@ function App() {
           <Route path="/globalTeacher" element={<ProductSignUp product= "GTe" />} />
           <Route path="/globalVolunteer" element={ <ProductSignUp product= "GV" />} />
           <Route path="/globalTalent" element={ <ProductSignUp product= "GTa" />} />
-          <Route path="/sampleEmail" element={ <SampleEmail />} /> {/* ##################### REMOVE THIS ROUTE AFTER TESTING #############################*/}
+          {/*<Route path="/sampleEmail" element={ <SampleEmail />} />*/} {/* ##################### REMOVE THIS ROUTE AFTER TESTING #############################*/}
           
         </Routes>
     </div>
