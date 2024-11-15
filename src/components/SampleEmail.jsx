@@ -1,3 +1,5 @@
+/*################################ REMOVE THIS FILE AFTER TESTING ############################## */
+
 import email_bg from '../assets/email_bg.png'
 import aiesec_man from '../assets/aiesec_man.png'
 
@@ -46,3 +48,6 @@ const SampleEmail = () => {
 }
 
 export default SampleEmail
+
+
+/*################################ REMOVE THIS FILE AFTER TESTING ############################## */
