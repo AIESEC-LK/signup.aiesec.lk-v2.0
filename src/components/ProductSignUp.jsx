@@ -252,12 +252,12 @@ const ProductSignUp = (props) => {
 
       //console.log("Signup response:", res);
       setShowSuccessModal(true); // please comment this line after testing
-/*
+
       await axios.post(
         "http://localhost:3000/api/email",
         {
-          email: payload.user.email,
-          name: payload.user.first_name + " " + payload.user.last_name,
+          email: payload.email,
+          name: payload.first_name + " " + payload.last_name,
         },
         {
           headers: {
@@ -267,9 +267,9 @@ const ProductSignUp = (props) => {
       );
       console.log("Email notification sent!");
       setShowSuccessModal(true);
-      */
+      
     } catch (error) {
-      //console.error("Error during form submission:", error);
+      console.log("Error during form submission:", error);
 
       if (error.response?.data?.errors?.email[0] === "has already been taken") {
         setMessageTitle("Already registered.");
