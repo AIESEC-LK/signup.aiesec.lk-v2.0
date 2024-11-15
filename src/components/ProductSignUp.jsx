@@ -459,12 +459,12 @@ const ProductSignUp = (props) => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="mt-1 px-4 py-1.5 w-full border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 text-sm"
                   >
                     {passwordVisible ? "Hide" : "Show"}
                   </button>
