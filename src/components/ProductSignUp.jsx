@@ -8,7 +8,6 @@ import GT from "../assets/GT.png";
 import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-<<<<<<< HEAD
 import { CheckCircleIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
@@ -25,10 +24,6 @@ const SuccessModal = ({ onClose }) => {
       document.body.style.overflow = 'auto';
     };
   }, []);
-=======
-import { useRef } from "react";
-
->>>>>>> c995acaa7941f43b4907f03882032f2fdffd0db7
 
   return (
     <div
@@ -151,16 +146,10 @@ const ProductSignUp = (props) => {
       ? GT
       : null;
 
-<<<<<<< HEAD
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
   const [messageTitle, setMessageTitle] = useState("");
   const [messageContent, setMessageContent] = useState("");
-=======
-  const inputRef = useRef(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
->>>>>>> c995acaa7941f43b4907f03882032f2fdffd0db7
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [requirementsMet, setRequirementsMet] = useState({
     charCount: false,
