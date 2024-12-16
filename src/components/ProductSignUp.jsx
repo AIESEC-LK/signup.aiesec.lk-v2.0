@@ -159,9 +159,6 @@ const ProductSignUp = (props) => {
   const togglePasswordVisibility = (event) => {
     event.preventDefault();
     setPasswordVisible(!passwordVisible);
-    setTimeout(() => {
-      inputRef.current.focus();
-    }, 0);
   };
 
 
@@ -510,7 +507,6 @@ const ProductSignUp = (props) => {
                 </span>
                 <div className="relative">
                   <input
-                   ref={inputRef} 
                     type={passwordVisible ? "text" : "password"}
                     name="password"
                     value={formData.password}
@@ -558,7 +554,6 @@ const ProductSignUp = (props) => {
                 </span>
                 <div className="relative">
                   <input
-                   ref={inputRef} 
 
                     type={passwordVisible ? "text" : "password"}
                     name="password"
