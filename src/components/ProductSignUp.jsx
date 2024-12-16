@@ -244,21 +244,24 @@ const ProductSignUp = (props) => {
         : null;
 
     const payload = {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        country_code: "+94",
-        //phone: formData.contactNumber,
-        contact_number: formData.contactNumber,
-        password: formData.password,
-        alignment_id: lead_alignment_id,
-        lc: lead_alignment_id,
-        referral_type: formData.howFoundUs || "Other",
-        allow_phone_communication: formData.permission,
-        allow_email_communication: formData.permission,
-        selected_programmes: [selectedProgramme],
+        user: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          country_code: "+94",
+          phone: formData.contactNumber,
+          contact_number: formData.contactNumber,
+          password: formData.password,
+          alignment_id: lead_alignment_id,
+          lc: lead_alignment_id,
+          referral_type: formData.howFoundUs || "Other",
+          allow_phone_communication: formData.permission,
+          allow_email_communication: formData.permission,
+          selected_programmes: [selectedProgramme],
+        }
       
     };
+
 
     //console.log("Payload:", payload);
 
@@ -266,7 +269,7 @@ const ProductSignUp = (props) => {
       const res = await axios.post(
        "https://auth.aiesec.org/users.json", // use this for production
        //"http://localhost:3000/api/users",   // use this for testing
-        payload,
+       payload,
         {
           headers: {
             "Content-Type": "application/json",
@@ -277,18 +280,19 @@ const ProductSignUp = (props) => {
       //console.log("Signup response:", res);
      // setShowSuccessModal(true); // please comment this line after testing
 
-      await axios.post(
-        "http://localhost:3000/api/email",
-        {
-          email: payload.email,
-          name: payload.first_name + " " + payload.last_name,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+     // Send email notification - Make Sure to host this server for production
+      // await axios.post(
+      //   "http://localhost:3000/api/email",
+      //   {
+      //     email: payload.email,
+      //     name: payload.first_name + " " + payload.last_name,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
       console.log("Email notification sent!");
       setShowSuccessModal(true);
       
