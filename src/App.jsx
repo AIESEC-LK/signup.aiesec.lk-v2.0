@@ -10,9 +10,9 @@ function App() {
     <div className="App">
         <Routes>
           <Route path="/" element={<SignUp />} />
-          <Route path="/globalTeacher" element={<ProductSignUp product= "GTe" />} />
-          <Route path="/globalVolunteer" element={ <ProductSignUp product= "GV" />} />
-          <Route path="/globalTalent" element={ <ProductSignUp product= "GTa" />} />
+          <Route path="/teach" element={<ProductSignUp product= "GTe" />} />
+          <Route path="/volunteer" element={ <ProductSignUp product= "GV" />} />
+          <Route path="/intern" element={ <ProductSignUp product= "GTa" />} />
           {/*<Route path="/sampleEmail" element={ <SampleEmail />} />*/} {/* ##################### REMOVE THIS ROUTE AFTER TESTING #############################*/}
           
         </Routes>
