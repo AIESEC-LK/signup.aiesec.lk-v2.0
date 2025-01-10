@@ -313,12 +313,12 @@ const ProductSignUp = (props) => {
           <div className="flex justify-between p-3">
             <img
               src={ProductLogo}
-              className=" h-4 sm:h-7 mt-3 md:mt-0 md:h-11 flex"
+              className=" h-6 sm:h-7 mt-3 md:mt-0 md:h-11 flex"
               alt=""
             />
             <img
               src={aiesec}
-              className=" h-4 sm:h-7 mt-3 md:mt-0 md:h-9 flex"
+              className=" h-6 sm:h-7 mt-3 md:mt-0 md:h-9 flex"
               alt=""
             />
           </div>
