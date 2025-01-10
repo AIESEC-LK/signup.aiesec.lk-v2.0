@@ -1,5 +1,5 @@
 import React from "react";
-import bg from "../assets/bg.png";
+import bg from "../assets/bg1.png";
 import vol from "../assets/volunteer.png";
 import int from "../assets/intern.png";
 import teach from "../assets/Teach.png";
