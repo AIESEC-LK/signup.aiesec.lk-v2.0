@@ -328,10 +328,10 @@ const ProductSignUp = (props) => {
                 <span className="text-[#F85A40]">Volunteer</span>
               )}
               {props.product === "GTe" && (
-                <span className="text-[#F48924]">Intern</span>
+                <span className="text-[#F48924]">Teach</span>
               )}
               {props.product === "GTa" && (
-                <span className="text-[#0CB9C1]">Teach</span>
+                <span className="text-[#0CB9C1]">Intern</span>
               )}
               . Abroad. Inspire the Future!
             </div>
