@@ -1,5 +1,5 @@
 import React from "react";
-import bg from "../assets/bg.png";
+import bg from "../assets/bg1.png";
 import vol from "../assets/volunteer.png";
 import int from "../assets/intern.png";
 import teach from "../assets/Teach.png";
@@ -54,7 +54,7 @@ function SignUp() {
 
         <div className="flex flex-wrap justify-center gap-7 mt-8 sm:mt-14">
           <div
-            onClick={() => navigate("/globalVolunteer")}
+            onClick={() => navigate("/volunteer")}
             className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
             <img src={vol} alt="Volunteer" className="w-full h-48 sm:h-64 object-cover" />
@@ -65,7 +65,7 @@ function SignUp() {
           </div>
 
           <div
-            onClick={() => navigate("/globalTalent")}
+            onClick={() => navigate("/intern")}
             className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
             <img
@@ -80,7 +80,7 @@ function SignUp() {
           </div>
 
           <div
-            onClick={() => navigate("/globalTeacher")}
+            onClick={() => navigate("/teach")}
             className="card w-48 sm:w-64 bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-500 hover:scale-105"
           >
             <img src={teach} alt="Teach" className="w-full h-48 sm:h-64 object-cover" />
