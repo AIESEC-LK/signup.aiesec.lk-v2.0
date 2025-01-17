@@ -105,12 +105,11 @@ const ProductSignUp = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  var EY = queryParams.get("EY");
+  var EY = queryParams?.get("EY");
   EY = EY ?? "Main";
   if (EY !== "Main") {
     EY = queryAlignments[EY];
   }
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -142,6 +141,7 @@ const ProductSignUp = (props) => {
     case: false,
     specialChar: false,
   });
+  const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term","utm_content"];
   const togglePasswordVisibility = (event) => {
     event.preventDefault();
     setPasswordVisible(!passwordVisible);
@@ -186,6 +186,40 @@ const ProductSignUp = (props) => {
       setShowFailedModal(true);
       return;
     }
+
+
+      const extractedParams = {};
+      for (const [key, value] of queryParams?.entries()) {
+        if (key.startsWith("utm_")) {
+          extractedParams[key] = value;
+        }
+      }
+      
+    
+      const sendDataToSheet = async () => {
+        const url = "https://script.google.com/macros/s/AKfycbwmU5MBUqx9kFRh_lR-QjGEG_NKv2ohPCRO4GaDcFg-mqt5XcMb6cQ_QctLmqZHccVVyg/exec"
+        try{
+          const response = await fetch(url,{
+            method: "POST",
+            headers : {
+              "Content-Type": "application/x-www-form-urlencoded",
+
+            },
+            body: new URLSearchParams(extractedParams),
+          })
+          const responseText = await response.text();
+          alert("Data sent successfully"+ responseText);
+        }catch(error){
+            console.error("Error sending data:",error);
+            alert("error sending data please try again.")
+        }
+       
+
+      }
+
+      if (Object.keys(extractedParams).length !== 0) {
+        await sendDataToSheet();
+      }
 
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
@@ -245,7 +279,7 @@ const ProductSignUp = (props) => {
     try {
       const res = await axios.post(
         "https://auth.aiesec.org/users.json", // use this for production
-        //"http://localhost:3000/api/users",   // use this for testing
+        // "http://localhost:3000/api/users",   // use this for testing
         payload,
         {
           headers: {
