@@ -106,6 +106,7 @@ const ProductSignUp = (props) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   var EY = queryParams?.get("EY");
+  console.log("EY", EY);
   EY = EY ?? "Main";
   if (EY !== "Main") {
     EY = queryAlignments[EY];
@@ -126,10 +127,10 @@ const ProductSignUp = (props) => {
     props.product === "GV"
       ? GVLogo
       : props.product === "GTe"
-        ? GTeLogo
-        : props.product === "GTa"
-          ? GT
-          : null;
+      ? GTeLogo
+      : props.product === "GTa"
+      ? GT
+      : null;
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
@@ -141,7 +142,7 @@ const ProductSignUp = (props) => {
     case: false,
     specialChar: false,
   });
-  const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term","utm_content"];
+  // const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term","utm_content"];
   const togglePasswordVisibility = (event) => {
     event.preventDefault();
     setPasswordVisible(!passwordVisible);
@@ -187,45 +188,68 @@ const ProductSignUp = (props) => {
       return;
     }
 
+    const extractedParams = {};
+    for (const [key, value] of queryParams?.entries()) {
+      extractedParams[key] = value;
+    }
+    console.log("extracted params", extractedParams);
+    console.log("ley", extractedParams.ley);
 
-      const extractedParams = {};
-      for (const [key, value] of queryParams?.entries()) {
-        if (key.startsWith("utm_")) {
-          extractedParams[key] = value;
+    //form data that will be sent to the tracker
+    const formD = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      contactNumber: formData.contactNumber,
+      yearOfStudy: formData.yearOfStudy,
+    };
+    console.log("form data",formD);
+    // Combine formData and extractedParams
+    const combinedData = { ...extractedParams, ...formD };
+    console.log("combined data",combinedData);
+    // Transform combinedData into URLSearchParams
+    const urlEncodedData = combinedData;
+    // for (const [key, value] of Object.entries(combinedData)) {
+    //   urlEncodedData.append(key, value);
+    // }
+    const serializedData = urlEncodedData.toString();
+    console.log("url encoded data",urlEncodedData);
+    console.log("Serialized Data:", urlEncodedData.toString());
+    console.log("Serialized Data:", serializedData);
+    const sendDataToSheet = async () => {
+      console.log("entered sendatatosheet function");
+      const url =
+        "https://script.google.com/macros/s/AKfycbzq444Z0YvFysUl9LbgfGbPHBSVOCIkcGRUU-GSb7kSKs69vZZwMsne_RfERkHV-civoA/exec";
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(combinedData),
+        });
+        console.log("response",response);
+        const responseText = await response.text();
+        console.log("response text",responseText);
+        if (response.ok) {
+          alert("Data sent successfully: " + responseText);
         }
+      } catch (error) {
+        console.error("Error sending data:", error);
+        alert("error sending data please try again.");
       }
-      
-    
-      const sendDataToSheet = async () => {
-        const url = "https://script.google.com/macros/s/AKfycbwmU5MBUqx9kFRh_lR-QjGEG_NKv2ohPCRO4GaDcFg-mqt5XcMb6cQ_QctLmqZHccVVyg/exec"
-        try{
-          const response = await fetch(url,{
-            method: "POST",
-            headers : {
-              "Content-Type": "application/x-www-form-urlencoded",
-
-            },
-            body: new URLSearchParams(extractedParams),
-          })
-          const responseText = await response.text();
-          alert("Data sent successfully"+ responseText);
-        }catch(error){
-            console.error("Error sending data:",error);
-            alert("error sending data please try again.")
-        }
-       
-
-      }
-
-      if (Object.keys(extractedParams).length !== 0) {
-        await sendDataToSheet();
-      }
-
+    };
+    console.log("called sendData to sheet function");
+    if (Object.keys(combinedData).length !== 0) {
+      console.log("send data to sheet function call");
+      await sendDataToSheet();
+    }
+    console.log("after the senddatatosheet function");
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
       setMessageTitle("Incorrect Contact Number.");
       setMessageContent(
-        "Please enter a valid 10-digit contact number. In the format: 0712345678",
+        "Please enter a valid 10-digit contact number. In the format: 0712345678"
       );
       setShowFailedModal(true);
       return;
@@ -235,7 +259,7 @@ const ProductSignUp = (props) => {
     if (!passwordRegex.test(formData.password)) {
       setMessageTitle("Password requirements not met.");
       setMessageContent(
-        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
       );
       setShowFailedModal(true);
       return;
@@ -253,10 +277,10 @@ const ProductSignUp = (props) => {
       props.product === "GV"
         ? 7
         : props.product === "GTe"
-          ? 8
-          : props.product === "GTa"
-            ? 9
-            : null;
+        ? 8
+        : props.product === "GTa"
+        ? 9
+        : null;
 
     const payload = {
       user: {
@@ -275,7 +299,7 @@ const ProductSignUp = (props) => {
         selected_programmes: [selectedProgramme],
       },
     };
-
+    console.log("payload",payload);
     try {
       const res = await axios.post(
         "https://auth.aiesec.org/users.json", // use this for production
@@ -285,23 +309,31 @@ const ProductSignUp = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
-        },
+        }
       );
       console.log("Email notification sent!");
       setShowSuccessModal(true);
     } catch (error) {
       console.log("Error during form submission:", error);
 
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+        console.error("Error status:", error.response.status);
+        console.error("Error headers:", error.response.headers);
+      } else {
+        console.error("Error message:", error.message);
+      }
+
       if (error.response?.data?.errors?.email[0] === "has already been taken") {
         setMessageTitle("Already registered.");
         setMessageContent(
-          "The email address has already been taken. Please try again with a different email address.",
+          "The email address has already been taken. Please try again with a different email address."
         );
         setShowFailedModal(true);
       } else {
         setMessageTitle("Network error.");
         setMessageContent(
-          "An error occurred while submitting the form. Please try again.",
+          "An error occurred while submitting the form. Please try again."
         );
         setShowFailedModal(true);
       }
@@ -319,7 +351,8 @@ const ProductSignUp = (props) => {
     >
       <div
         onClick={() => navigate("/")}
-        className=" fixed top-12 left-2 z-10 sm:left-6 md:left-9 cursor-pointer">
+        className=" fixed top-12 left-2 z-10 sm:left-6 md:left-9 cursor-pointer"
+      >
         <img src={back} alt="" className="h-5 sm:h-8" />
       </div>
       <div
@@ -327,10 +360,10 @@ const ProductSignUp = (props) => {
           props.product === "GTa"
             ? "bg-cyan-500"
             : props.product === "GV"
-              ? "bg-red-500"
-              : props.product === "GTe"
-                ? "bg-amber-500"
-                : ""
+            ? "bg-red-500"
+            : props.product === "GTe"
+            ? "bg-amber-500"
+            : ""
         } h-60`}
         style={{
           zIndex: 1, // Set this layer above the background
@@ -674,19 +707,19 @@ const ProductSignUp = (props) => {
                               props.product === "GTa"
                                 ? "bg-cyan-500"
                                 : props.product === "GV"
-                                  ? "bg-red-500"
-                                  : props.product === "GTe"
-                                    ? "bg-amber-500"
-                                    : ""
+                                ? "bg-red-500"
+                                : props.product === "GTe"
+                                ? "bg-amber-500"
+                                : ""
                             }
                             ${
                               props.product === "GTa"
                                 ? "hover:bg-cyan-800"
                                 : props.product === "GV"
-                                  ? "hover:bg-red-800"
-                                  : props.product === "GTe"
-                                    ? "hover:bg-amber-800"
-                                    : ""
+                                ? "hover:bg-red-800"
+                                : props.product === "GTe"
+                                ? "hover:bg-amber-800"
+                                : ""
                             }
 
                         `}
