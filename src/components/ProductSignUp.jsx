@@ -106,7 +106,6 @@ const ProductSignUp = (props) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   var EY = queryParams?.get("EY");
-  console.log("EY", EY);
   EY = EY ?? "Main";
   if (EY !== "Main") {
     EY = queryAlignments[EY];
@@ -142,7 +141,6 @@ const ProductSignUp = (props) => {
     case: false,
     specialChar: false,
   });
-  // const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term","utm_content"];
   const togglePasswordVisibility = (event) => {
     event.preventDefault();
     setPasswordVisible(!passwordVisible);
@@ -192,9 +190,6 @@ const ProductSignUp = (props) => {
     for (const [key, value] of queryParams?.entries()) {
       extractedParams[key] = value;
     }
-    console.log("extracted params", extractedParams);
-    console.log("ley", extractedParams.ley);
-
     //form data that will be sent to the tracker
     const formD = {
       firstName: formData.firstName,
@@ -203,21 +198,10 @@ const ProductSignUp = (props) => {
       contactNumber: formData.contactNumber,
       yearOfStudy: formData.yearOfStudy,
     };
-    console.log("form data",formD);
-    // Combine formData and extractedParams
     const combinedData = { ...extractedParams, ...formD };
-    console.log("combined data",combinedData);
-    // Transform combinedData into URLSearchParams
     const urlEncodedData = combinedData;
-    // for (const [key, value] of Object.entries(combinedData)) {
-    //   urlEncodedData.append(key, value);
-    // }
     const serializedData = urlEncodedData.toString();
-    console.log("url encoded data",urlEncodedData);
-    console.log("Serialized Data:", urlEncodedData.toString());
-    console.log("Serialized Data:", serializedData);
     const sendDataToSheet = async () => {
-      console.log("entered sendatatosheet function");
       const url =
         "https://script.google.com/macros/s/AKfycbzq444Z0YvFysUl9LbgfGbPHBSVOCIkcGRUU-GSb7kSKs69vZZwMsne_RfERkHV-civoA/exec";
       try {
@@ -228,9 +212,7 @@ const ProductSignUp = (props) => {
           },
           body: new URLSearchParams(combinedData),
         });
-        console.log("response",response);
         const responseText = await response.text();
-        console.log("response text",responseText);
         if (response.ok) {
           alert("Data sent successfully: " + responseText);
         }
@@ -239,12 +221,9 @@ const ProductSignUp = (props) => {
         alert("error sending data please try again.");
       }
     };
-    console.log("called sendData to sheet function");
     if (Object.keys(combinedData).length !== 0) {
-      console.log("send data to sheet function call");
       await sendDataToSheet();
     }
-    console.log("after the senddatatosheet function");
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
       setMessageTitle("Incorrect Contact Number.");
@@ -299,7 +278,6 @@ const ProductSignUp = (props) => {
         selected_programmes: [selectedProgramme],
       },
     };
-    console.log("payload",payload);
     try {
       const res = await axios.post(
         "https://auth.aiesec.org/users.json", // use this for production
