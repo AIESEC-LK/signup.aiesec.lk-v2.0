@@ -280,7 +280,7 @@ const ProductSignUp = (props) => {
     };
     try {
       const res = await axios.post(
-        "https://auth.aiesec.org/users.json", // use this for production
+        "https://staging-jruby.aiesec.org/graphql", // use this for production
         // "http://localhost:3000/api/users",   // use this for testing
         payload,
         {
