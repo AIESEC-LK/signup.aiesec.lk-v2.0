@@ -13,7 +13,7 @@ import back from "../assets/back.svg";
 import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { CheckCircleIcon } from "@heroicons/react/16/solid";
+import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
 const SuccessModal = ({ onClose }) => {
@@ -117,7 +117,6 @@ const ProductSignUp = (props) => {
     password: "",
     contactNumber: "",
     howFoundUs: "",
-    yearOfStudy: "",
     permission: false,
     alignmentName: EY !== "Main" ? EY : "",
   });
@@ -170,7 +169,6 @@ const ProductSignUp = (props) => {
       password: "",
       contactNumber: "",
       howFoundUs: "",
-      yearOfStudy: "",
       permission: false,
       alignmentName: EY !== "Main" ? EY : "",
     });
@@ -190,20 +188,26 @@ const ProductSignUp = (props) => {
     for (const [key, value] of queryParams?.entries()) {
       extractedParams[key] = value;
     }
+
+    
     //form data that will be sent to the tracker
-    const formD = {
+    let formD = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       contactNumber: formData.contactNumber,
-      yearOfStudy: formData.yearOfStudy,
+      university: queryParams?.get("ley") || formData.alignmentName
     };
-    const combinedData = { ...extractedParams, ...formD };
+    let combinedData = { ...extractedParams, ...formD };
     const urlEncodedData = combinedData;
     const serializedData = urlEncodedData.toString();
     const sendDataToSheet = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycbzq444Z0YvFysUl9LbgfGbPHBSVOCIkcGRUU-GSb7kSKs69vZZwMsne_RfERkHV-civoA/exec";
+        "https://script.google.com/macros/s/AKfycbx_7s6xyRm3bnCTm98PNDA92K20h1y9xQJRwe8ReViqyrqYtWx4gEscu4-u6MRhc-gZKA/exec";
+        const urlObj = new URL(url);
+        combinedData.url = urlObj.href; 
+      
+
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -213,17 +217,15 @@ const ProductSignUp = (props) => {
           body: new URLSearchParams(combinedData),
         });
         const responseText = await response.text();
-        if (response.ok) {
-          alert("Data sent successfully: " + responseText);
-        }
+        // if (response.ok) {
+        //   alert("Data sent successfully: " + responseText);
+        // }
       } catch (error) {
         console.error("Error sending data:", error);
-        alert("error sending data please try again.");
+        // alert("error sending data please try again.");
       }
     };
-    if (Object.keys(combinedData).length !== 0) {
-      await sendDataToSheet();
-    }
+  
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
       setMessageTitle("Incorrect Contact Number.");
@@ -279,17 +281,20 @@ const ProductSignUp = (props) => {
       },
     };
     try {
-      const res = await axios.post(
-        "https://staging-jruby.aiesec.org/graphql", // use this for production
-        // "http://localhost:3000/api/users",   // use this for testing
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const res = await axios.post(
+      //   "https://staging-jruby.aiesec.org/graphql", // use this for production
+      //   // "http://localhost:3000/api/users",   // use this for testing
+      //   payload,
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
       console.log("Email notification sent!");
+      if (Object.keys(combinedData).length !== 0) {
+        await sendDataToSheet();
+      }
       setShowSuccessModal(true);
     } catch (error) {
       console.log("Error during form submission:", error);
@@ -446,99 +451,64 @@ const ProductSignUp = (props) => {
 
             <div className="">
               {EY === "Main" ? (
-                <div className="md:flex flex-1 space-x-4">
-                  <label className="md:block flex-1 md:mr-10">
-                    <span className="block font-bold text-m text-gray-700 mb-2">
-                      University / Institute:*
-                    </span>
-                    <select
-                      name="alignmentName"
-                      value={formData.alignmentName}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option value="">Select University</option>
-                      {alignment.map((item) => (
-                        <option
-                          key={`${item.id}-${item.name}-${item["data-id"]}`}
-                          value={item.name}
-                        >
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {/* University / Institute Field */}
+  <div>
+    <label className="block">
+      <span className="block font-bold text-m text-gray-700 mb-2">
+        University / Institute:*
+      </span>
+      <select
+        name="alignmentName"
+        value={formData.alignmentName}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">Select University</option>
+        {alignment.map((item) => (
+          <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
 
-                  <label className="flex-1 md:block">
-                    <span className="block font-bold text-m text-gray-700 mb-2 ">
-                      Year of Study:
-                    </span>
-                    <select
-                      name="yearOfStudy"
-                      value={formData.yearOfStudy}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 w-full px-4 py-2 border  rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option value="">Select Year of Study</option>
-                      <option value="1">1st Year</option>
-                      <option value="2">2nd Year</option>
-                      <option value="3">3rd Year</option>
-                      <option value="4">4th Year</option>
-                    </select>
-                  </label>
-                </div>
+  {/* How did you find us Field */}
+  
+{
+  queryParams?.get("ley") ? (<></>) :  (
+    <div>
+    <label className="block">
+      <span className="block font-bold text-m text-gray-700 mb-2">
+        How did you find us:*
+      </span>
+      <select
+        name="howFoundUs"
+        value={formData.howFoundUs}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">Select option</option>
+        <option key="friend" value="Friend">Friend</option>
+        <option key="social_media" value="Social Media">Social Media</option>
+        <option key="other" value="Other">Other</option>
+      </select>
+    </label>
+  </div>
+  )
+}
+  
+ 
+</div>
               ) : (
                 <>
-                  <div className="md:flex md:flex-row justify-between w-full ">
-                    <label className="block md:w-full md:pr-2 md:mr-10 mt-5 md:mt-0">
-                      <span className="block font-bold text-m text-gray-700 mb-2">
-                        Year of Study:
-                      </span>
-                      <select
-                        name="yearOfStudy"
-                        value={formData.yearOfStudy}
-                        onChange={handleChange}
-                        required
-                        className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                      >
-                        <option value="">Select Year of Study</option>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4nd Year</option>
-                      </select>
-                    </label>
-                    <div className="block md:w-full md:pl-2 mt-5 md:mt-0">
-                      <label className="md:block flex-1">
-                        <span className="block font-bold text-m text-gray-700 mb-2">
-                          How did you find us:*
-                        </span>
-                        <select
-                          name="howFoundUs"
-                          value={formData.howFoundUs}
-                          onChange={handleChange}
-                          required
-                          className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                        >
-                          <option value="">Select option</option>
-                          <option key="friend" value="Friend">
-                            Friend
-                          </option>
-                          <option key="social_media" value="Social Media">
-                            Social Media
-                          </option>
-                          <option key="other" value="Other">
-                            Other
-                          </option>
-                        </select>
-                      </label>
-                    </div>
-                  </div>
+
                   <div className="space-y-4">
                     <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
-                      <label className="block md:w-full md:pr-2 md:mr-10   ">
+                      <label className="block md:w-full md:pr-2 md:mr--10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
                         <span className="block font-bold text-m text-gray-700 mb-2 mt-4 ">
@@ -635,31 +605,6 @@ const ProductSignUp = (props) => {
                       </li>
                     </ul>
                   </div>
-                </label>
-              )}
-              {EY === "Main" && (
-                <label className="md:block flex-1">
-                  <span className="block font-bold text-m text-gray-700 mb-2">
-                    How did you find us:*
-                  </span>
-                  <select
-                    name="howFoundUs"
-                    value={formData.howFoundUs}
-                    onChange={handleChange}
-                    required
-                    className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="">Select option</option>
-                    <option key="friend" value="Friend">
-                      Friend
-                    </option>
-                    <option key="social_media" value="Social Media">
-                      Social Media
-                    </option>
-                    <option key="other" value="Other">
-                      Other
-                    </option>
-                  </select>
                 </label>
               )}
             </div>
