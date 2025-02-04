@@ -204,15 +204,12 @@ const ProductSignUp = (props) => {
     let combinedData = { ...extractedParams, ...formD };
     const urlEncodedData = combinedData;
     const serializedData = urlEncodedData.toString();
-    console.log("university",formD.university);
     const sendDataToSheet = async () => {
       const url =
         "https://script.google.com/macros/s/AKfycbx_7s6xyRm3bnCTm98PNDA92K20h1y9xQJRwe8ReViqyrqYtWx4gEscu4-u6MRhc-gZKA/exec";
         const urlObj = new URL(url);
         combinedData.url = urlObj.href; 
-        console.log("combined data later",combinedData);
-        console.log("urlObj",urlObj);
-        console.log("urlObj.href",urlObj.href);
+      
 
       try {
         const response = await fetch(url, {
@@ -223,12 +220,12 @@ const ProductSignUp = (props) => {
           body: new URLSearchParams(combinedData),
         });
         const responseText = await response.text();
-        if (response.ok) {
-          alert("Data sent successfully: " + responseText);
-        }
+        // if (response.ok) {
+        //   alert("Data sent successfully: " + responseText);
+        // }
       } catch (error) {
         console.error("Error sending data:", error);
-        alert("error sending data please try again.");
+        // alert("error sending data please try again.");
       }
     };
   
@@ -287,16 +284,16 @@ const ProductSignUp = (props) => {
       },
     };
     try {
-      // const res = await axios.post(
-      //   "https://staging-jruby.aiesec.org/graphql", // use this for production
-      //   // "http://localhost:3000/api/users",   // use this for testing
-      //   payload,
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
+      const res = await axios.post(
+        "https://staging-jruby.aiesec.org/graphql", // use this for production
+        // "http://localhost:3000/api/users",   // use this for testing
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("Email notification sent!");
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
