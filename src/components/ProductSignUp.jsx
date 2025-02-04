@@ -13,7 +13,7 @@ import back from "../assets/back.svg";
 import alignment from "../assets/alignment.json";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { CheckCircleIcon } from "@heroicons/react/16/solid";
+import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
 const SuccessModal = ({ onClose }) => {
@@ -281,16 +281,16 @@ const ProductSignUp = (props) => {
       },
     };
     try {
-      const res = await axios.post(
-        "https://staging-jruby.aiesec.org/graphql", // use this for production
-        // "http://localhost:3000/api/users",   // use this for testing
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const res = await axios.post(
+      //   "https://staging-jruby.aiesec.org/graphql", // use this for production
+      //   // "http://localhost:3000/api/users",   // use this for testing
+      //   payload,
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
       console.log("Email notification sent!");
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
@@ -476,7 +476,10 @@ const ProductSignUp = (props) => {
   </div>
 
   {/* How did you find us Field */}
-  <div>
+  
+{
+  queryParams?.get("ley") ? (<></>) :  (
+    <div>
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         How did you find us:*
@@ -495,6 +498,10 @@ const ProductSignUp = (props) => {
       </select>
     </label>
   </div>
+  )
+}
+  
+ 
 </div>
               ) : (
                 <>
