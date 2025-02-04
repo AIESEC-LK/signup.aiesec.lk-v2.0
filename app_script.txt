@@ -1,0 +1,138 @@
+function doOptions() {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeader("Access-Control-Allow-Origin", "*")
+    .setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    .setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+function doPost(e) {
+ 
+  // Log incoming parameters
+  console.log("entered do post function");
+  Logger.log(e.parameter);
+  
+
+
+
+  const params = e.parameter;
+  const entity = params.ley || params.university;
+
+  
+  // Validate entity
+  if (!entity) {
+    return ContentService.createTextOutput("Missing or invalid 'ley' parameter.")
+      .setMimeType(ContentService.MimeType.TEXT);
+  }
+  
+  const spreadsheetId = "10bFZ9SMJO-8h5LE5Kfx0A3j6cxdQfVKC75bPagrjnkg"; // Your spreadsheet ID
+  const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+
+  // Map entity to sheet
+  let sheet;
+
+
+  switch (entity) {
+    case "cc":
+      sheet = spreadsheet.getSheetByName("cc");
+      break;
+    case "cs":
+      sheet = spreadsheet.getSheetByName("cs");
+      break;
+    case "kandy":
+      sheet = spreadsheet.getSheetByName("kandy");
+      break;
+    case "sliit":
+      sheet = spreadsheet.getSheetByName("sliit");
+      break;
+    case "rajarata":
+      sheet = spreadsheet.getSheetByName("rajarata");
+      break;
+    case "nibm":
+      sheet = spreadsheet.getSheetByName("nibm");
+      break;
+    case "nsbm":
+      sheet = spreadsheet.getSheetByName("nsbm");
+      break;
+    case "cn":
+      sheet = spreadsheet.getSheetByName("cn");
+      break;
+    case "ruhuna":
+      sheet = spreadsheet.getSheetByName("ruhuna");
+      break;
+    default:
+      return ContentService.createTextOutput("Invalid entity value.")
+        .setMimeType(ContentService.MimeType.TEXT);
+  }
+
+ if (params.utm_term && params.utm_term.includes(".")) {
+  const utmParts = params.utm_term.split(".");
+  params.utm_term = utmParts[0];  // First part (month)
+  params.creator = utmParts[1];    // Second part (creator)
+}
+
+  const paramToHeaderMapping = {
+    "firstName" : "First Name",
+    "lastName" : "Last Name",
+    "email" : "Email",
+    "contactNumber" : "Contact No",
+    "yearOfStudy" : "Year Of Study",
+    "utm_source": "UTM Source",
+    "utm_medium": "UTM Medium",
+    "utm_campaign" : "UTM Campaign (Product)",
+    "utm_term": "UTM Term",
+    "utm_content": "UTM Content",
+    "id": "Campaign ID",
+    "url":"UTM Link",
+    "creator":"Campaign Creator/Team Name"
+  };
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const normalizedHeaders = headers.map(header => header.toLowerCase().replace(/\s+/g, ''));
+  
+
+
+
+  // Prepopulate newRow with empty values for all columns
+  const newRow = Array(headers.length).fill("");
+
+  // Insert timestamp in the first column
+  newRow[0] = new Date();
+
+
+  Object.entries(params).forEach(([param, value]) => {
+    const mappedHeader = paramToHeaderMapping[param];
+    if (mappedHeader) {
+      const headerIndex = headers.indexOf(mappedHeader);
+      if (headerIndex !== -1) {
+        newRow[headerIndex] = value;
+      }
+    }
+  });
+
+
+
+  Logger.log("newRow before append: " + JSON.stringify(newRow));
+  sheet.appendRow(newRow);
+
+  return ContentService.createTextOutput("Success: Row appended.")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+
+
+
+
+
+function testDoPost() {
+  const e = {
+    parameter: {
+       ley: 'cc',
+    utm_source: 'Facbook',
+    utm_medium: 'Blog',
+    utm_campaign: 'GT',
+    utm_term: 'January',
+    utm_content: 'story',
+    id: 'LK-test'
+    }
+  };
+  doPost(e);
+}
