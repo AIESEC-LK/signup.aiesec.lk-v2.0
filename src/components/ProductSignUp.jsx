@@ -117,7 +117,6 @@ const ProductSignUp = (props) => {
     password: "",
     contactNumber: "",
     howFoundUs: "",
-    yearOfStudy: "",
     permission: false,
     alignmentName: EY !== "Main" ? EY : "",
   });
@@ -170,7 +169,6 @@ const ProductSignUp = (props) => {
       password: "",
       contactNumber: "",
       howFoundUs: "",
-      yearOfStudy: "",
       permission: false,
       alignmentName: EY !== "Main" ? EY : "",
     });
@@ -198,7 +196,6 @@ const ProductSignUp = (props) => {
       lastName: formData.lastName,
       email: formData.email,
       contactNumber: formData.contactNumber,
-      yearOfStudy: formData.yearOfStudy,
       university: queryParams?.get("ley") || formData.alignmentName
     };
     let combinedData = { ...extractedParams, ...formD };
@@ -454,99 +451,57 @@ const ProductSignUp = (props) => {
 
             <div className="">
               {EY === "Main" ? (
-                <div className="md:flex flex-1 space-x-4">
-                  <label className="md:block flex-1 md:mr-10">
-                    <span className="block font-bold text-m text-gray-700 mb-2">
-                      University / Institute:*
-                    </span>
-                    <select
-                      name="alignmentName"
-                      value={formData.alignmentName}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option value="">Select University</option>
-                      {alignment.map((item) => (
-                        <option
-                          key={`${item.id}-${item.name}-${item["data-id"]}`}
-                          value={item.name}
-                        >
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {/* University / Institute Field */}
+  <div>
+    <label className="block">
+      <span className="block font-bold text-m text-gray-700 mb-2">
+        University / Institute:*
+      </span>
+      <select
+        name="alignmentName"
+        value={formData.alignmentName}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">Select University</option>
+        {alignment.map((item) => (
+          <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
 
-                  <label className="flex-1 md:block">
-                    <span className="block font-bold text-m text-gray-700 mb-2 ">
-                      Year of Study:
-                    </span>
-                    <select
-                      name="yearOfStudy"
-                      value={formData.yearOfStudy}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 w-full px-4 py-2 border  rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option value="">Select Year of Study</option>
-                      <option value="1">1st Year</option>
-                      <option value="2">2nd Year</option>
-                      <option value="3">3rd Year</option>
-                      <option value="4">4th Year</option>
-                    </select>
-                  </label>
-                </div>
+  {/* How did you find us Field */}
+  <div>
+    <label className="block">
+      <span className="block font-bold text-m text-gray-700 mb-2">
+        How did you find us:*
+      </span>
+      <select
+        name="howFoundUs"
+        value={formData.howFoundUs}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">Select option</option>
+        <option key="friend" value="Friend">Friend</option>
+        <option key="social_media" value="Social Media">Social Media</option>
+        <option key="other" value="Other">Other</option>
+      </select>
+    </label>
+  </div>
+</div>
               ) : (
                 <>
-                  <div className="md:flex md:flex-row justify-between w-full ">
-                    <label className="block md:w-full md:pr-2 md:mr-10 mt-5 md:mt-0">
-                      <span className="block font-bold text-m text-gray-700 mb-2">
-                        Year of Study:
-                      </span>
-                      <select
-                        name="yearOfStudy"
-                        value={formData.yearOfStudy}
-                        onChange={handleChange}
-                        required
-                        className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                      >
-                        <option value="">Select Year of Study</option>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4nd Year</option>
-                      </select>
-                    </label>
-                    <div className="block md:w-full md:pl-2 mt-5 md:mt-0">
-                      <label className="md:block flex-1">
-                        <span className="block font-bold text-m text-gray-700 mb-2">
-                          How did you find us:*
-                        </span>
-                        <select
-                          name="howFoundUs"
-                          value={formData.howFoundUs}
-                          onChange={handleChange}
-                          required
-                          className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                        >
-                          <option value="">Select option</option>
-                          <option key="friend" value="Friend">
-                            Friend
-                          </option>
-                          <option key="social_media" value="Social Media">
-                            Social Media
-                          </option>
-                          <option key="other" value="Other">
-                            Other
-                          </option>
-                        </select>
-                      </label>
-                    </div>
-                  </div>
+
                   <div className="space-y-4">
                     <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
-                      <label className="block md:w-full md:pr-2 md:mr-10   ">
+                      <label className="block md:w-full md:pr-2 md:mr--10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
                         <span className="block font-bold text-m text-gray-700 mb-2 mt-4 ">
@@ -643,31 +598,6 @@ const ProductSignUp = (props) => {
                       </li>
                     </ul>
                   </div>
-                </label>
-              )}
-              {EY === "Main" && (
-                <label className="md:block flex-1">
-                  <span className="block font-bold text-m text-gray-700 mb-2">
-                    How did you find us:*
-                  </span>
-                  <select
-                    name="howFoundUs"
-                    value={formData.howFoundUs}
-                    onChange={handleChange}
-                    required
-                    className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="">Select option</option>
-                    <option key="friend" value="Friend">
-                      Friend
-                    </option>
-                    <option key="social_media" value="Social Media">
-                      Social Media
-                    </option>
-                    <option key="other" value="Other">
-                      Other
-                    </option>
-                  </select>
                 </label>
               )}
             </div>
