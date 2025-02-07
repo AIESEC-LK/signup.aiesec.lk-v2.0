@@ -1,3 +1,4 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 
@@ -11,11 +12,9 @@ import aiesec from "../assets/pbaiesec.png";
 import back from "../assets/back.svg";
 
 import alignment from "../assets/alignment.json";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+
 import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
-
 const SuccessModal = ({ onClose }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -103,7 +102,6 @@ const queryAlignments = {
 
 const ProductSignUp = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   var EY = queryParams?.get("EY");
   EY = EY ?? "Main";
@@ -131,6 +129,7 @@ const ProductSignUp = (props) => {
       : null;
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isEntityLink, setIsEntityLink] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
   const [messageTitle, setMessageTitle] = useState("");
   const [messageContent, setMessageContent] = useState("");
@@ -323,6 +322,14 @@ const ProductSignUp = (props) => {
     }
   };
 
+  useEffect(() => {
+    const url = location.pathname;
+    if (url.includes("entity")) {
+      setIsEntityLink(true);
+    }
+    
+  }, []);
+
   return (
     <div
       className="-z-50 w-screen bg-cover bg-center bg-no-repeat"
@@ -453,27 +460,29 @@ const ProductSignUp = (props) => {
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
   {/* University / Institute Field */}
-  <div className="mr-4">
-    <label className="block">
-      <span className="block font-bold text-m text-gray-700 mb-2">
-        University / Institute:*
-      </span>
-      <select
-        name="alignmentName"
-        value={formData.alignmentName}
-        onChange={handleChange}
-        required
-        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-      >
-        <option value="">Select University</option>
-        {alignment.map((item) => (
-          <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  </div>
+    {!isEntityLink && (
+      <div className="mr-4">
+        <label className="block">
+          <span className="block font-bold text-m text-gray-700 mb-2">
+            University / Institute:*
+          </span>
+          <select
+            name="alignmentName"
+            value={formData.alignmentName}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">Select University</option>
+            {alignment.map((item) => (
+              <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    )}
 
   {/* How did you find us Field */}
   
