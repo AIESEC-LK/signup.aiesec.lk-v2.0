@@ -325,7 +325,7 @@ const ProductSignUp = (props) => {
 
   return (
     <div
-      className="-z-50 h-screen w-screen bg-cover bg-center bg-no-repeat"
+      className="-z-50 w-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
@@ -375,15 +375,15 @@ const ProductSignUp = (props) => {
           <div>
             <div className="text-xl sm:text-2xl font-bold sm:mb-5 mt-8 mb-8 sm:mt-5 text-gray-800 text-center">
               {props.product === "GV" && (
-                <span className="text-[#F85A40]">Volunteer</span>
+                <span className="text-[#F85A40]">Volunteer </span>
               )}
               {props.product === "GTe" && (
-                <span className="text-[#F48924]">Teach</span>
+                <span className="text-[#F48924]">Teach </span>
               )}
               {props.product === "GTa" && (
-                <span className="text-[#0CB9C1]">Intern</span>
+                <span className="text-[#0CB9C1]">Intern </span>
               )}
-              . Abroad. Inspire the Future!
+               Abroad. Inspire the Future!
             </div>
           </div>
 
@@ -453,7 +453,7 @@ const ProductSignUp = (props) => {
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
   {/* University / Institute Field */}
-  <div>
+  <div className="mr-4">
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         University / Institute:*
@@ -479,7 +479,7 @@ const ProductSignUp = (props) => {
   
 {
   queryParams?.get("ley") ? (<></>) :  (
-    <div>
+    <div className="ml-4">
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         How did you find us:*
@@ -507,11 +507,11 @@ const ProductSignUp = (props) => {
                 <>
 
                   <div className="space-y-4">
-                    <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
+                    <div className="md:flex md:flex-row justify-between md:mt-4 ">
                       <label className="block md:w-full md:pr-2 md:mr--10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
-                        <span className="block font-bold text-m text-gray-700 mb-2 mt-4 ">
+                        <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
                           Password:*
                         </span>
                         <div className="relative">

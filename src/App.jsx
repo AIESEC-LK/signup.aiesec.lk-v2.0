@@ -2,7 +2,7 @@ import "./App.css";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ProductSignUp from "./components/ProductSignUp";
-import SampleEmail from "./components/SampleEmail";
+//import SampleEmail from "./components/SampleEmail";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
