@@ -1,3 +1,4 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 
@@ -11,11 +12,9 @@ import aiesec from "../assets/pbaiesec.png";
 import back from "../assets/back.svg";
 
 import alignment from "../assets/alignment.json";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+
 import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
-
 const SuccessModal = ({ onClose }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -103,7 +102,6 @@ const queryAlignments = {
 
 const ProductSignUp = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   var EY = queryParams?.get("EY");
   EY = EY ?? "Main";
@@ -131,6 +129,7 @@ const ProductSignUp = (props) => {
       : null;
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isEntityLink, setIsEntityLink] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
   const [messageTitle, setMessageTitle] = useState("");
   const [messageContent, setMessageContent] = useState("");
@@ -323,9 +322,17 @@ const ProductSignUp = (props) => {
     }
   };
 
+  useEffect(() => {
+    const url = location.pathname;
+    if (url.includes("entity")) {
+      setIsEntityLink(true);
+    }
+    
+  }, []);
+
   return (
     <div
-      className="-z-50 h-screen w-screen bg-cover bg-center bg-no-repeat"
+      className="-z-50 w-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
@@ -375,15 +382,15 @@ const ProductSignUp = (props) => {
           <div>
             <div className="text-xl sm:text-2xl font-bold sm:mb-5 mt-8 mb-8 sm:mt-5 text-gray-800 text-center">
               {props.product === "GV" && (
-                <span className="text-[#F85A40]">Volunteer</span>
+                <span className="text-[#F85A40]">Volunteer </span>
               )}
               {props.product === "GTe" && (
-                <span className="text-[#F48924]">Teach</span>
+                <span className="text-[#F48924]">Teach </span>
               )}
               {props.product === "GTa" && (
-                <span className="text-[#0CB9C1]">Intern</span>
+                <span className="text-[#0CB9C1]">Intern </span>
               )}
-              . Abroad. Inspire the Future!
+               Abroad. Inspire the Future!
             </div>
           </div>
 
@@ -453,33 +460,35 @@ const ProductSignUp = (props) => {
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
   {/* University / Institute Field */}
-  <div>
-    <label className="block">
-      <span className="block font-bold text-m text-gray-700 mb-2">
-        University / Institute:*
-      </span>
-      <select
-        name="alignmentName"
-        value={formData.alignmentName}
-        onChange={handleChange}
-        required
-        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-      >
-        <option value="">Select University</option>
-        {alignment.map((item) => (
-          <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </label>
-  </div>
+    {!isEntityLink && (
+      <div className="mr-4">
+        <label className="block">
+          <span className="block font-bold text-m text-gray-700 mb-2">
+            University / Institute:*
+          </span>
+          <select
+            name="alignmentName"
+            value={formData.alignmentName}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">Select University</option>
+            {alignment.map((item) => (
+              <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    )}
 
   {/* How did you find us Field */}
   
 {
   queryParams?.get("ley") ? (<></>) :  (
-    <div>
+    <div className="ml-4">
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         How did you find us:*
@@ -507,11 +516,11 @@ const ProductSignUp = (props) => {
                 <>
 
                   <div className="space-y-4">
-                    <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
+                    <div className="md:flex md:flex-row justify-between md:mt-4 ">
                       <label className="block md:w-full md:pr-2 md:mr--10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
-                        <span className="block font-bold text-m text-gray-700 mb-2 mt-4 ">
+                        <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
                           Password:*
                         </span>
                         <div className="relative">
@@ -565,9 +574,9 @@ const ProductSignUp = (props) => {
                 </>
               )}
             </div>
-            <div className="md:flex flex-1 space-x-4">
+            <div className="md:flex flex-1 w-1/2">
               {EY === "Main" && (
-                <label className="block flex-1 md:mr-10">
+                <label className="block flex-1 mr-6">
                   <span className="block font-bold text-m text-gray-700 mb-2 ">
                     Password:*
                   </span>
