@@ -463,7 +463,7 @@ const ProductSignUp = (props) => {
 {
   queryParams?.get("ley") ? (<></>) :  (
     <>
-    <div className="mr-4">
+    <div className="mr-0 md:mr-4 lg:mr-4">
         <label className="block">
           <span className="block font-bold text-m text-gray-700 mb-2">
             University / Institute:*
@@ -484,7 +484,7 @@ const ProductSignUp = (props) => {
           </select>
         </label>
       </div>
-    <div className="ml-4">
+    <div className="ml-0 md:ml-4 lg:ml-4">
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         How did you find us:*
@@ -514,7 +514,7 @@ const ProductSignUp = (props) => {
 
                   <div className="space-y-4">
                     <div className="md:flex md:flex-row justify-between md:mt-4 ">
-                      <label className="block md:w-full md:pr-2 md:mr--10   ">
+                      <label className="block md:w-full md:pr-2 md:mr-10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
                         <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
@@ -571,9 +571,9 @@ const ProductSignUp = (props) => {
                 </>
               )}
             </div>
-            <div className="md:flex flex-1 w-1/2">
+            <div className="md:flex flex-1 w-full md:w-1/2 lg:w-1/2">
               {EY === "Main" && (
-                <label className="block flex-1 mr-6">
+                <label className="block flex-1 md:mr-6 lg:mr-6">
                   <span className="block font-bold text-m text-gray-700 mb-2 ">
                     Password:*
                   </span>
