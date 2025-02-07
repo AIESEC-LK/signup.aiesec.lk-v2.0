@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 
@@ -459,9 +459,11 @@ const ProductSignUp = (props) => {
             <div className="">
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {/* University / Institute Field */}
-    {!isEntityLink && (
-      <div className="mr-4">
+  
+{
+  queryParams?.get("ley") ? (<></>) :  (
+    <>
+    <div className="mr-4">
         <label className="block">
           <span className="block font-bold text-m text-gray-700 mb-2">
             University / Institute:*
@@ -482,12 +484,6 @@ const ProductSignUp = (props) => {
           </select>
         </label>
       </div>
-    )}
-
-  {/* How did you find us Field */}
-  
-{
-  queryParams?.get("ley") ? (<></>) :  (
     <div className="ml-4">
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
@@ -507,6 +503,7 @@ const ProductSignUp = (props) => {
       </select>
     </label>
   </div>
+  </>
   )
 }
   
