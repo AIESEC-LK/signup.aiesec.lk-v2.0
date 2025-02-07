@@ -565,9 +565,9 @@ const ProductSignUp = (props) => {
                 </>
               )}
             </div>
-            <div className="md:flex flex-1 space-x-4">
+            <div className="md:flex flex-1 w-1/2">
               {EY === "Main" && (
-                <label className="block flex-1 md:mr-10">
+                <label className="block flex-1 mr-6">
                   <span className="block font-bold text-m text-gray-700 mb-2 ">
                     Password:*
                   </span>
