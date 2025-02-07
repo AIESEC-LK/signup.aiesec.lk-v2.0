@@ -203,7 +203,7 @@ const ProductSignUp = (props) => {
     const serializedData = urlEncodedData.toString();
     const sendDataToSheet = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycbxzegVoLnMZQ8n-uChpy4ScxxTMKSwzbqOcdOdImcRD8mVTzntXMvHPE_xIFNF_SwfoBQ/exec";
+        "https://script.google.com/macros/s/AKfycbyIBH_s-i0KID1pb5TQFhaeLOmQ8bBk6j975r-orDJwHCiLAUA-g6XP-m6gCUOUGJcKOA/exec";         
         const urlObj = new URL(url);
         combinedData.url = urlObj.href; 
       
