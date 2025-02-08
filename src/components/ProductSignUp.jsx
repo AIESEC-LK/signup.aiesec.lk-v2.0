@@ -332,7 +332,7 @@ const ProductSignUp = (props) => {
 
   return (
     <div
-      className="-z-50 w-screen bg-cover bg-center bg-no-repeat"
+      className="-z-50 w-full bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
