@@ -186,6 +186,7 @@ const ProductSignUp = (props) => {
     const extractedParams = {};
     for (const [key, value] of queryParams?.entries()) {
       extractedParams[key] = value;
+
     }
 
     
