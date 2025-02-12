@@ -225,9 +225,7 @@ const ProductSignUp = (props) => {
         // alert("error sending data please try again.");
       }
     };
-    if (Object.keys(combinedData).length !== 0) {
-      await sendDataToSheet();
-    }
+   
   
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
