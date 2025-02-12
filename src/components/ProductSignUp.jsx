@@ -204,9 +204,8 @@ const ProductSignUp = (props) => {
     const serializedData = urlEncodedData.toString();
     const sendDataToSheet = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycbyWw61t-ma4sCm-U_27xe0QV4VhB_y4Fqp77O71Y-NmYCRt_pTIqWFhr0w5rc6sC0mg_g/exec";
-        const urlObj = new URL(url);
-        combinedData.url = urlObj.href; 
+        "https://script.google.com/macros/s/AKfycbwN61xI0jgA7KO-dL0EtNPTufcs1wq1dAL8TLBYOa3zNPPn3V_Uqwe5284jLkaT84MqWA/exec";
+        combinedData.url = window.location.href; 
       
 
       try {
@@ -285,16 +284,16 @@ const ProductSignUp = (props) => {
       },
     };
     try {
-      const res = await axios.post(
-        "https://staging-jruby.aiesec.org/graphql", // use this for production
-        // "http://localhost:3000/api/users",   // use this for testing
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const res = await axios.post(
+      //   "https://staging-jruby.aiesec.org/graphql", // use this for production
+      //   // "http://localhost:3000/api/users",   // use this for testing
+      //   payload,
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
       console.log("Email notification sent!");
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
