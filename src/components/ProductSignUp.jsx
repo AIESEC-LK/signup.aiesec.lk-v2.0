@@ -284,16 +284,16 @@ const ProductSignUp = (props) => {
       },
     };
     try {
-      // const res = await axios.post(
-      //   "https://staging-jruby.aiesec.org/graphql", // use this for production
-      //   // "http://localhost:3000/api/users",   // use this for testing
-      //   payload,
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
+      const res = await axios.post(
+        "https://staging-jruby.aiesec.org/graphql", // use this for production
+        // "http://localhost:3000/api/users",   // use this for testing
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("Email notification sent!");
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
