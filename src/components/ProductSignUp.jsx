@@ -12,7 +12,6 @@ import aiesec from "../assets/pbaiesec.png";
 import back from "../assets/back.svg";
 
 import alignment from "../assets/alignment.json";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
