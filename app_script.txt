@@ -10,9 +10,6 @@ function doPost(e) {
   // Log incoming parameters
   console.log("entered do post function");
   Logger.log(e.parameter);
-  
-
-
 
   const params = e.parameter;
   const entity = params.ley || params.university;
@@ -29,8 +26,7 @@ function doPost(e) {
 
   // Map entity to sheet
   let sheet;
-
-
+  let MCSheet=spreadsheet.getSheetByName("MC");
   switch (entity) {
     case "cc":
       sheet = spreadsheet.getSheetByName("cc");
@@ -59,9 +55,14 @@ function doPost(e) {
     case "ruhuna":
       sheet = spreadsheet.getSheetByName("ruhuna");
       break;
+    case "usj":
+      sheet = spreadsheet.getSheetByName("usj");
+      break;
     default:
-      return ContentService.createTextOutput("Invalid entity value.")
-        .setMimeType(ContentService.MimeType.TEXT);
+      sheet = spreadsheet.getSheetByName("national");
+      break;
+      // return ContentService.createTextOutput("Invalid entity value.")
+      //   .setMimeType(ContentService.MimeType.TEXT);
   }
 
  if (params.utm_term && params.utm_term.includes(".")) {
@@ -75,7 +76,6 @@ function doPost(e) {
     "lastName" : "Last Name",
     "email" : "Email",
     "contactNumber" : "Contact No",
-    "yearOfStudy" : "Year Of Study",
     "utm_source": "UTM Source",
     "utm_medium": "UTM Medium",
     "utm_campaign" : "UTM Campaign (Product)",
@@ -113,6 +113,8 @@ function doPost(e) {
 
   Logger.log("newRow before append: " + JSON.stringify(newRow));
   sheet.appendRow(newRow);
+  MCSheet.appendRow(newRow);
+
 
   return ContentService.createTextOutput("Success: Row appended.")
     .setMimeType(ContentService.MimeType.TEXT);

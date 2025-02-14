@@ -12,7 +12,8 @@ import aiesec from "../assets/pbaiesec.png";
 import back from "../assets/back.svg";
 
 import alignment from "../assets/alignment.json";
-
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 const SuccessModal = ({ onClose }) => {
@@ -203,9 +204,8 @@ const ProductSignUp = (props) => {
     const serializedData = urlEncodedData.toString();
     const sendDataToSheet = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycbyIBH_s-i0KID1pb5TQFhaeLOmQ8bBk6j975r-orDJwHCiLAUA-g6XP-m6gCUOUGJcKOA/exec";         
-        const urlObj = new URL(url);
-        combinedData.url = urlObj.href; 
+        "https://script.google.com/macros/s/AKfycbwN61xI0jgA7KO-dL0EtNPTufcs1wq1dAL8TLBYOa3zNPPn3V_Uqwe5284jLkaT84MqWA/exec";
+        combinedData.url = window.location.href; 
       
 
       try {
@@ -225,6 +225,7 @@ const ProductSignUp = (props) => {
         // alert("error sending data please try again.");
       }
     };
+   
   
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
@@ -460,32 +461,34 @@ const ProductSignUp = (props) => {
             <div className="">
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {/* University / Institute Field */}
+  <div>
+    <label className="block">
+      <span className="block font-bold text-m text-gray-700 mb-2">
+        University / Institute:*
+      </span>
+      <select
+        name="alignmentName"
+        value={formData.alignmentName}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option value="">Select University</option>
+        {alignment.map((item) => (
+          <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
+
+  {/* How did you find us Field */}
   
 {
   queryParams?.get("ley") ? (<></>) :  (
-    <>
-    <div className="mr-0 md:mr-4 lg:mr-4">
-        <label className="block">
-          <span className="block font-bold text-m text-gray-700 mb-2">
-            University / Institute:*
-          </span>
-          <select
-            name="alignmentName"
-            value={formData.alignmentName}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-          >
-            <option value="">Select University</option>
-            {alignment.map((item) => (
-              <option key={`${item.id}-${item.name}-${item["data-id"]}`} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-    <div className="ml-0 md:ml-4 lg:ml-4">
+    <div>
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
         How did you find us:*
@@ -504,7 +507,6 @@ const ProductSignUp = (props) => {
       </select>
     </label>
   </div>
-  </>
   )
 }
   
@@ -514,8 +516,8 @@ const ProductSignUp = (props) => {
                 <>
 
                   <div className="space-y-4">
-                    <div className="md:flex md:flex-row justify-between md:mt-4 ">
-                      <label className="block md:w-full md:pr-2 md:mr-10   ">
+                    <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
+                      <label className="block md:w-full md:pr-2 md:mr--10   ">
                         {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
                         <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
