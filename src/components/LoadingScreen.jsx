@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import aiesec_man_animated from "../assets/aiesec_man_animated.gif";
 import aiesec_man from "../assets/aiesec_man.png";
 
+
+/// This is a progress bar and it improves the UX
 const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState("Submitting ...");
