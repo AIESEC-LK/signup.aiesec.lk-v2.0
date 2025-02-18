@@ -100,10 +100,11 @@ const queryAlignments = {
   cn: 872,
 };
 
+// getting the ley from the url
 const ProductSignUp = (props) => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
-  var EY = queryParams?.get("EY");
+  var EY = queryParams?.get("ley");
   EY = EY ?? "Main";
   if (EY !== "Main") {
     EY = queryAlignments[EY];
@@ -189,7 +190,6 @@ const ProductSignUp = (props) => {
 
     }
 
-    
     //form data that will be sent to the tracker
     let formD = {
       firstName: formData.firstName,
@@ -216,16 +216,13 @@ const ProductSignUp = (props) => {
           body: new URLSearchParams(combinedData),
         });
         const responseText = await response.text();
-        // if (response.ok) {
-        //   alert("Data sent successfully: " + responseText);
-        // }
+        
       } catch (error) {
         console.error("Error sending data:", error);
-        // alert("error sending data please try again.");
       }
     };
    
-  
+    // contact number validity check
     const contactNumberRegex = /^[0-9]{9,10}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
       setMessageTitle("Incorrect Contact Number.");
@@ -236,6 +233,7 @@ const ProductSignUp = (props) => {
       return;
     }
 
+    // password strength check
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
     if (!passwordRegex.test(formData.password)) {
       setMessageTitle("Password requirements not met.");
@@ -250,7 +248,7 @@ const ProductSignUp = (props) => {
     if (EY === "Main") {
       lead_alignment_id =
         alignment.find((item) => item.name === formData.alignmentName)?.id ||
-        1821;
+        1623;
     } else {
       lead_alignment_id = EY;
     }
@@ -331,6 +329,7 @@ const ProductSignUp = (props) => {
     
   }, []);
 
+  // component rendering
   return (
     <div
       className="-z-50 w-full bg-cover bg-center bg-no-repeat"
@@ -460,7 +459,11 @@ const ProductSignUp = (props) => {
             <div className="">
               {EY === "Main" ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {/* University / Institute Field */}
+
+  {/* University / Institute Field - should be removed for ley links*/}
+
+  {
+  queryParams?.get("ley") ? (<></>) :  (
   <div>
     <label className="block">
       <span className="block font-bold text-m text-gray-700 mb-2">
@@ -482,8 +485,9 @@ const ProductSignUp = (props) => {
       </select>
     </label>
   </div>
-
-  {/* How did you find us Field */}
+  )
+}
+  {/* How did you find us Field - should be removed for ley links */}
   
 {
   queryParams?.get("ley") ? (<></>) :  (
@@ -501,7 +505,14 @@ const ProductSignUp = (props) => {
       >
         <option value="">Select option</option>
         <option key="friend" value="Friend">Friend</option>
-        <option key="social_media" value="Social Media">Social Media</option>
+        <option key="event" value="Event">Event</option>
+        <option key="classroom_session" value="CLassroom Session">Classroom Session</option>
+        <option key="stall" value="Stall">Stall</option>
+        <option key="facebook" value="Facebook">Facebook</option>
+        <option key="instagram" value="Instagram">Instagram</option>
+        <option key="linkedin" value="LinkedIn">LinkedIn</option>
+        <option key="tiktok" value="Tik Tok">Tik Tok</option>
+        <option key="poster" value="Poster">Poster</option>
         <option key="other" value="Other">Other</option>
       </select>
     </label>
@@ -511,149 +522,149 @@ const ProductSignUp = (props) => {
   
  
 </div>
-              ) : (
-                <>
+  ) : (
+    <>
 
-                  <div className="space-y-4">
-                    <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
-                      <label className="block md:w-full md:pr-2 md:mr--10   ">
-                        {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
+      <div className="space-y-4">
+        <div className="md:flex md:flex-row justify-between w-full md:mt-4 ">
+          <label className="block md:w-full md:pr-2 md:mr--10   ">
+            {/* <label className="block md:w-full md:pr-2 md:mr-10    "> */}
 
-                        <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
-                          Password:*
-                        </span>
-                        <div className="relative">
-                          <input
-                            type={passwordVisible ? "text" : "password"}
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            className="mt-1 px-4 py-2 w-full border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                          />
-                          <button
-                            type="button"
-                            onClick={togglePasswordVisibility}
-                            className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
-                          >
-                            {passwordVisible ? "Hide" : "Show"}
-                          </button>
-                        </div>
-                      </label>
-                      <div className="block md:w-full md:pl-2 mt-5 ">
-                        <div className="text-black text-xs mt-2 items-center  ">
-                          <div className="requirements ">
-                            <p className="">Password must,</p>
-
-                            <ul className="list-disc pl-3 ">
-                              <li
-                                className={
-                                  requirementsMet.charCount ? "met" : ""
-                                }
-                              >
-                                Include at least 8 characters
-                              </li>
-
-                              <li className={requirementsMet.case ? "met" : ""}>
-                                Include lowercase & uppercase letters
-                              </li>
-                              <li
-                                className={
-                                  requirementsMet.specialChar ? "met" : ""
-                                }
-                              >
-                                Include a special character
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="md:flex flex-1 w-full md:w-1/2 lg:w-1/2">
-              {EY === "Main" && (
-                <label className="block flex-1 md:mr-6 lg:mr-6">
-                  <span className="block font-bold text-m text-gray-700 mb-2 ">
-                    Password:*
-                  </span>
-                  <div className="relative">
-                    <input
-                      type={passwordVisible ? "text" : "password"}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 px-4 py-1.5 w-full border  rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                    <button
-                      type="button"
-                      onClick={togglePasswordVisibility}
-                      className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 text-sm"
-                    >
-                      {passwordVisible ? "Hide" : "Show"}
-                    </button>
-                  </div>
-                  <div className="requirements text-xs text-black mt-2 ">
-                    <p className="">Password must,</p>
-
-                    <ul className="list-disc pl-3  ">
-                      <li className={requirementsMet.charCount ? "met" : ""}>
-                        {" "}
-                        Include at least 8 characters
-                      </li>
-
-                      <li className={requirementsMet.case ? "met" : ""}>
-                        Include lowercase & uppercase letters
-                      </li>
-                      <li className={requirementsMet.specialChar ? "met" : ""}>
-                        Include a special character
-                      </li>
-                    </ul>
-                  </div>
-                </label>
-              )}
-            </div>
-
-            <div className="flex items-center">
+            <span className="block font-bold text-m text-gray-700 mb-2 mt-4">
+              Password:*
+            </span>
+            <div className="relative">
               <input
-                type="checkbox"
-                name="permission"
-                checked={formData.permission}
+                type={passwordVisible ? "text" : "password"}
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
-                className="focus:outline-none mr-2 h-4  text-indigo-600 rounded focus:ring-indigo-500 "
+                required
+                className="mt-1 px-4 py-2 w-full border rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
               />
-              <span className="text-sm text-gray-700">
-                I give permission to be contacted by phone/email.
-              </span>
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500"
+              >
+                {passwordVisible ? "Hide" : "Show"}
+              </button>
+            </div>
+          </label>
+          <div className="block md:w-full md:pl-2 mt-5 ">
+            <div className="text-black text-xs mt-2 items-center  ">
+              <div className="requirements ">
+                <p className="">Password must,</p>
+
+                <ul className="list-disc pl-3 ">
+                  <li
+                    className={
+                      requirementsMet.charCount ? "met" : ""
+                    }
+                  >
+                    Include at least 8 characters
+                  </li>
+
+                  <li className={requirementsMet.case ? "met" : ""}>
+                    Include lowercase & uppercase letters
+                  </li>
+                  <li
+                    className={
+                      requirementsMet.specialChar ? "met" : ""
+                    }
+                  >
+                    Include a special character
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </>
+  )}
+</div>
+<div className="md:flex flex-1 w-full md:w-1/2 lg:w-1/2">
+  {EY === "Main" && (
+    <label className="block flex-1 md:mr-6 lg:mr-6">
+      <span className="block font-bold text-m text-gray-700 mb-2 ">
+        Password:*
+      </span>
+      <div className="relative">
+        <input
+          type={passwordVisible ? "text" : "password"}
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          className="mt-1 px-4 py-1.5 w-full border  rounded-md shadow-sm bg-white text-gray-800 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 text-sm"
+        >
+          {passwordVisible ? "Hide" : "Show"}
+        </button>
+      </div>
+      <div className="requirements text-xs text-black mt-2 ">
+        <p className="">Password must,</p>
 
-          <button
-            type="submit"
-            className={`mt-6 px-5   py-2 rounded-lg text-white font-bold transition duration-300 ease-in-out
-                            ${
-                              props.product === "GTa"
-                                ? "bg-cyan-500"
-                                : props.product === "GV"
-                                ? "bg-red-500"
-                                : props.product === "GTe"
-                                ? "bg-amber-500"
-                                : ""
-                            }
-                            ${
-                              props.product === "GTa"
-                                ? "hover:bg-cyan-800"
-                                : props.product === "GV"
-                                ? "hover:bg-red-800"
-                                : props.product === "GTe"
-                                ? "hover:bg-amber-800"
-                                : ""
-                            }
+        <ul className="list-disc pl-3  ">
+          <li className={requirementsMet.charCount ? "met" : ""}>
+            {" "}
+            Include at least 8 characters
+          </li>
 
-                        `}
+          <li className={requirementsMet.case ? "met" : ""}>
+            Include lowercase & uppercase letters
+          </li>
+          <li className={requirementsMet.specialChar ? "met" : ""}>
+            Include a special character
+          </li>
+        </ul>
+      </div>
+    </label>
+  )}
+</div>
+
+<div className="flex items-center">
+<input
+  type="checkbox"
+  name="permission"
+  checked={formData.permission}
+  onChange={handleChange}
+  className="focus:outline-none mr-2 h-4  text-indigo-600 rounded focus:ring-indigo-500 "
+/>
+<span className="text-sm text-gray-700">
+  I give permission to be contacted by phone/email.
+</span>
+</div>
+</div>
+
+<button
+type="submit"
+className={`mt-6 px-5   py-2 rounded-lg text-white font-bold transition duration-300 ease-in-out
+              ${
+                props.product === "GTa"
+                  ? "bg-cyan-500"
+                  : props.product === "GV"
+                  ? "bg-red-500"
+                  : props.product === "GTe"
+                  ? "bg-amber-500"
+                  : ""
+              }
+              ${
+                props.product === "GTa"
+                  ? "hover:bg-cyan-800"
+                  : props.product === "GV"
+                  ? "hover:bg-red-800"
+                  : props.product === "GTe"
+                  ? "hover:bg-amber-800"
+                  : ""
+              }
+
+          `}
           >
             Submit
           </button>
