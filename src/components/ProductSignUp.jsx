@@ -87,27 +87,15 @@ const FailModal = ({ onClose, messageTitle, messageContent }) => {
   );
 };
 
-const queryAlignments = {
-  cs: 1340,
-  cc: 222,
-  usj: 221,
-  kandy: 2204,
-  ruhuna: 2175,
-  sliit: 2188,
-  rajarata: 5490,
-  nibm: 4535,
-  nsbm: 2186,
-  cn: 872,
-};
-
-// getting the ley from the url
+// getting the ley from the url and assignining the alignment (data-id)
 const ProductSignUp = (props) => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   var EY = queryParams?.get("ley");
   EY = EY ?? "Main";
   if (EY !== "Main") {
-    EY = queryAlignments[EY];
+    EY = alignment.find((item) => item.alignment === formData.alignmentName)?.data-id ||
+    7675;
   }
   const [formData, setFormData] = useState({
     firstName: "",
@@ -117,7 +105,7 @@ const ProductSignUp = (props) => {
     contactNumber: "",
     howFoundUs: "",
     permission: false,
-    alignmentName: EY !== "Main" ? EY : 1623,
+    alignmentName: EY !== "Main" ? EY : 7675,
   });
 
   const ProductLogo =
@@ -170,7 +158,7 @@ const ProductSignUp = (props) => {
       contactNumber: "",
       howFoundUs: "",
       permission: false,
-      alignmentName: EY !== "Main" ? EY : 1623,
+      alignmentName: EY !== "Main" ? EY : 7675,
     });
   };
 
@@ -223,11 +211,11 @@ const ProductSignUp = (props) => {
     };
    
     // contact number validity check
-    const contactNumberRegex = /^[0-9]{9,10}$/;
+    const contactNumberRegex = /^[0-9]{9}$/;
     if (!contactNumberRegex.test(formData.contactNumber)) {
       setMessageTitle("Incorrect Contact Number.");
       setMessageContent(
-        "Please enter a valid 10-digit contact number. In the format: 0712345678"
+        "Please enter a valid 10-digit contact number. In the format: 712345678"
       );
       setShowFailedModal(true);
       return;
@@ -248,7 +236,7 @@ const ProductSignUp = (props) => {
     if (EY === "Main") {
       lead_alignment_id =
         alignment.find((item) => item.name === formData.alignmentName)?.id ||
-        1623;
+        7675;
     } else {
       lead_alignment_id = EY;
     }
@@ -261,7 +249,7 @@ const ProductSignUp = (props) => {
         ? 9
         : null;
 
-    console.log("LEY", EY);
+    
 
     const payload = {
       user: {
@@ -292,6 +280,7 @@ const ProductSignUp = (props) => {
         }
       );
       console.log("Email notification sent!");
+      console.log("LEY", EY);
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
       }
