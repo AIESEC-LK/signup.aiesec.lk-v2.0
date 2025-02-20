@@ -1,362 +1,199 @@
 [
-    {
-        "data-id": 13078,
-        "value": "222",
-        "name": "Institute of Universal Higher Studies",
-        "alignment": "iusl"
-    },
-    {
-        "data-id": 13106,
-        "value": "1340",
-        "name": "Sri Lanka Technological Campus",
-        "alignment": "sltc"
-    },
-    {
-        "data-id": 13086,
-        "value": "222",
-        "name": "Universal College Lanka (UCL)",
-        "alignment": "ucl"
-    },
-    {
-        "data-id": 13098,
-        "value": "2188",
-        "name": "CINEC Campus",
-        "alignment": "cinec"
-    },
-    {
-        "data-id": 37260,
-        "value": "2204",
-        "name": "University of Vavuniya",
-        "alignment": "vavuniya"
-    },
-    {
-        "data-id": 13117,
-        "value": "1340",
-        "name": "ESOL College International",
-        "alignment": "esol"
-    },
-    {
-        "data-id": 8723,
-        "value": "222",
-        "name": "Asia Pacific Institute of Information Technology (APIIT)",
-        "alignment": "apiit"
-    },
-    {
-        "data-id": 11570,
-        "value": "221",
-        "name": "Saegis Campus",
-        "alignment": "saegis"
-    },
-    {
-        "data-id": 11115,
-        "value": "221",
-        "name": "British Council",
-        "alignment": "british_council"
-    },
-    {
-        "data-id": 13990,
-        "value": "221",
-        "name": "Wayamba University of Sri Lanka",
-        "alignment": "wayamba"
-    },
-    {
-        "data-id": 13991,
-        "value": "5490",
-        "name": "Rajarata University of Sri Lanka",
-        "alignment": "rajarata"
-    },
-    {
-        "data-id": 11572,
-        "value": "2186",
-        "name": "BMS Campus",
-        "alignment": "bms_campus"
-    },
-    {
-        "data-id": 13368,
-        "value": "1340",
-        "name": "St. George International Teacher Training Institute",
-        "alignment": "st_george"
-    },
-    {
-        "data-id": 10232,
-        "value": "2204",
-        "name": "Imperial College",
-        "alignment": "imperial_college"
-    },
-    {
-        "data-id": 13139,
-        "value": "2175",
-        "name": "Apex Business Academy",
-        "alignment": "apex"
-    },
-    {
-        "data-id": 13108,
-        "value": "1340",
-        "name": "The Open University of Sri Lanka",
-        "alignment": "open_uni"
-    },
-    {
-        "data-id": 13136,
-        "value": "5490",
-        "name": "IDM Nations Campus",
-        "alignment": "idm"
-    },
-    {
-        "data-id": 11113,
-        "value": "1340",
-        "name": "Goethe-Institut Sri Lanka",
-        "alignment": "gisl"
-    },
-    {
-        "data-id": 11119,
-        "value": "872",
-        "name": "Uva Wellassa University",
-        "alignment": "uwu"
-    },
-    {
-        "data-id": 13433,
-        "value": "2175",
-        "name": "University of Ruhuna",
-        "alignment": "ruhuna"
-    },
-    {
-        "data-id": 11127,
-        "value": "1340",
-        "name": "Sabaragamuwa University",
-        "alignment": "susl"
-    },
-    {
-        "data-id": 11112,
-        "value": "872",
-        "name": "Australian College Business Technology Institute (ACBT)",
-        "alignment": "acbt"
-    },
-    {
-        "data-id": 11125,
-        "value": "1340",
-        "name": "AMDT School of Creativity",
-        "alignment": "amdt"
-    },
-    {
-        "data-id": 11136,
-        "value": "2204",
-        "name": "University of Jaffna",
-        "alignment": "jaffna"
-    },
-    {
-        "data-id": 11146,
-        "value": "2175",
-        "name": "ESOFT",
-        "alignment": "esoft"
-    },
-    {
-        "data-id": 7673,
-        "value": "2188",
-        "name": "SLIIT",
-        "alignment": "sliit"
-    },
-    {
-        "data-id": 10226,
-        "value": "872",
-        "name": "Northshore College of Business & Technology",
-        "alignment": "ncbt"
-    },
-    {
-        "data-id": 11108,
-        "value": "222",
-        "name": "Sri Lanka Institute of Advanced Technological Education (SLIATE)",
-        "alignment": "sliate"
-    },
-    {
-        "data-id": 7675,
-        "value": "1821",
-        "name": "Other",
-        "alignment": "other"
-    },
-    {
-        "data-id": 11132,
-        "value": "2175",
-        "name": "Aquinas College of Higher Studies",
-        "alignment": "aquinas"
-    },
-    {
-        "data-id": 11121,
-        "value": "4535",
-        "name": "Institute of Chemistry Ceylon",
-        "alignment": "icc"
-    },
-    {
-        "data-id": 11128,
-        "value": "221",
-        "name": "Wisdom Business Academy",
-        "alignment": "wisdom"
-    },
-    {
-        "data-id": 11126,
-        "value": "4535",
-        "name": "Nawaloka College of Higher Studies",
-        "alignment": "nawaloka_college"
-    },
-    {
-        "data-id": 7671,
-        "value": "2204",
-        "name": "University of Peradeniya",
-        "alignment": "kandy"
-    },
-    {
-        "data-id": 11116,
-        "value": "872",
-        "name": "National Institute of Social Development (NISD)",
-        "alignment": "nisd"
-    },
-    {
-        "data-id": 8722,
-        "value": "222",
-        "name": "Royal Institute of Colombo",
-        "alignment": "ric"
-    },
-    {
-        "data-id": 7997,
-        "value": "872",
-        "name": "Informatics Institute of Technology (IIT)",
-        "alignment": "iit"
-    },
-    {
-        "data-id": 39484,
-        "value": "222",
-        "name": "SLIIT Kandy UNI",
-        "alignment": "sliit_ku"
-    },
-    {
-        "data-id": 38626,
-        "value": "221",
-        "name": "ICBT Campus",
-        "alignment": "icbt"
-    },
-    {
-        "data-id": 38659,
-        "value": "222",
-        "name": "Sri Lanka Institute of Tourism & Hotel Management (SLITHM)",
-        "alignment": "slithm"
-    },
-    {
-        "data-id": 38661,
-        "value": "1340",
-        "name": "BCI Campus",
-        "alignment": "bcic"
-    },
-    {
-        "data-id": 38660,
-        "value": "872",
-        "name": "Mahaweli National College of Education",
-        "alignment": "mnce"
-    },
-    {
-        "data-id": 38662,
-        "value": "2204",
-        "name": "Java Institute For Advanced Technology",
-        "alignment": "java_institute"
-    },
-    {
-        "data-id": 38663,
-        "value": "221",
-        "name": "Edith Cowan University Sri Lanka (ECU)",
-        "alignment": "ecu"
-    },
-    {
-        "data-id": 38664,
-        "value": "4535",
-        "name": "Oxford College of Business Sri Lanka",
-        "alignment": "ocbsl"
-    },
-    {
-        "data-id": 38665,
-        "value": "2188",
-        "name": "IMBS Green Campus",
-        "alignment": "imbs"
-    },
-    {
-        "data-id": 7667,
-        "value": "222",
-        "name": "University of Colombo",
-        "alignment": "cc"
-    },
-    {
-        "data-id": 7672,
-        "value": "2175",
-        "name": "University of Ruhuna",
-        "alignment": "ruhuna"
-    },
-    {
-        "data-id": 10231,
-        "value": "1340",
-        "name": "Kotelawala Defence University",
-        "alignment": "kdu"
-    },
-    {
-        "data-id": 7669,
-        "value": "1340",
-        "name": "University of Moratuwa",
-        "alignment": "cs"
-    },
-    {
-        "data-id": 14179,
-        "value": "4535",
-        "name": "National Institute of Business Management (NIBM)",
-        "alignment": "nibm"
-    },
-    {
-        "data-id": 7674,
-        "value": "2186",
-        "name": "NSBM Green University",
-        "alignment": "nsbm"
-    },
-    {
-        "data-id": 13400,
-        "value": "222",
-        "name": "KAATSU International University",
-        "alignment": "kaatsu_intl_uni"
-    },
-    {
-        "data-id": 39485,
-        "value": "2175",
-        "name": "Eastern University of Sri Lanka",
-        "alignment": "eusl"
-    },
-    {
-        "data-id": 11152,
-        "value": "5490",
-        "name": "Horizon Campus",
-        "alignment": "horizon_campus"
-    },
-    {
-        "data-id": 11124,
-        "value": "1340",
-        "name": "Academy of Design",
-        "alignment": "academy_of_design"
-    },
-    {
-        "data-id": 13077,
-        "value": "222",
-        "name": "Sri Lanka Institute of Marketing",
-        "alignment": "slim"
-    },
-    {
-        "data-id": 7668,
-        "value": "872",
-        "name": "University of Kelaniya",
-        "alignment": "cn"
-    },
-    {
-        "data-id": 11571,
-        "value": "2188",
-        "name": "British College of Applied Studies (BCAS)",
-        "alignment": "bcas"
-    },
-    {
-        "data-id": 7670,
-        "value": "221",
-        "name": "University of Sri Jayawardenepura",
-        "alignment": "usj"
-    }
+	{ "data-id": 7667, "value": 222, "lc": "CC", "name": "University of Colombo", "alignment": "cc" },
+	{ "data-id": 7668, "value": 872, "lc": "CN", "name": "University of Kelaniya", "alignment": "cn" },
+	{ "data-id": 7669, "value": 1340, "lc": "CS", "name": "University of Moratuwa", "alignment": "cs" },
+	{
+		"data-id": 7670,
+		"value": 221,
+		"lc": "USJ",
+		"name": "University of Sri Jayawardenepura",
+		"alignment": "usj"
+	},
+	{
+		"data-id": 7671,
+		"value": 2204,
+		"lc": "KANDY",
+		"name": "University of Peradeniya",
+		"alignment": "kandy"
+	},
+	{
+		"data-id": 7672,
+		"value": 2175,
+		"lc": "RUHUNA",
+		"name": "University of Ruhuna",
+		"alignment": "ruhuna"
+	},
+	{ "data-id": 7673, "value": 2188, "lc": "SLIIT", "name": "SLIIT", "alignment": "sliit" },
+	{ "data-id": 7674, "value": 2186, "lc": "NSBM", "name": "NSBM Green University", "alignment": "nsbm" },
+	{
+		"data-id": 13991,
+		"value": 5490,
+		"lc": "RAJARATA",
+		"name": "Rajarata University of Sri Lanka",
+		"alignment": "rajarata"
+	},
+	{ "data-id": 11124, "value": 1340, "lc": "CS", "name": "Academy of Design", "alignment": "academy_of_design" },
+	{ "data-id": 11125, "value": 1340, "lc": "CS", "name": "AMDT School of Creativity", "alignment": "amdt" },
+	{ "data-id": 13139, "value": 2175, "lc": "RUHUNA", "name": "Apex Business Academy", "alignment": "apex" },
+	{
+		"data-id": 11132,
+		"value": 2175,
+		"lc": "RUHUNA",
+		"name": "Aquinas College of Higher Studies",
+		"alignment": "aquinas"
+	},
+	{
+		"data-id": 8723,
+		"value": 222,
+		"lc": "CC",
+		"name": "Asia Pacific Institute of Information Technology (APIIT)",
+		"alignment": "apiit"
+	},
+	{
+		"data-id": 11112,
+		"value": 872,
+		"lc": "CN",
+		"name": "Australian College Business Technology Institute (ACBT)",
+		"alignment": "acbt"
+	},
+	{ "data-id": 38661, "value": 1340, "lc": "CS", "name": "BCI Campus", "alignment": "bcic" },
+	{ "data-id": 11572, "value": 2186, "lc": "NSBM", "name": "BMS Campus", "alignment": "bms_campus" },
+	{
+		"data-id": 11571,
+		"value": 2188,
+		"lc": "SLIIT",
+		"name": "British College of Applied Studies (BCAS)",
+		"alignment": "bcas"
+	},
+	{ "data-id": 11115, "value": 221, "lc": "USJ", "name": "British Council", "alignment": "british_council" },
+	{ "data-id": 13098, "value": 2188, "lc": "SLIIT", "name": "CINEC Campus", "alignment": "cinec" },
+	{ "data-id": 39485, "value": 2175, "lc": "RUHUNA", "name": "Eastern University of Sri Lanka", "alignment": "eusl" },
+	{
+		"data-id": 38663,
+		"value": 221,
+		"lc": "USJ",
+		"name": "Edith Cowan University Sri Lanka (ECU)",
+		"alignment": "ecu"
+	},
+	{ "data-id": 11146, "value": 2175, "lc": "RUHUNA", "name": "ESOFT", "alignment": "esoft" },
+	{ "data-id": 13117, "value": 1340, "lc": "CS", "name": "ESOL College International", "alignment": "esol" },
+	{ "data-id": 11113, "value": 1340, "lc": "CS", "name": "Goethe-Institut Sri Lanka", "alignment": "gisl" },
+	{ "data-id": 11152, "value": 5490, "lc": "RAJARATA", "name": "Horizon Campus", "alignment": "horizon_campus" },
+	{ "data-id": 38626, "value": 221, "lc": "USJ", "name": "ICBT Campus", "alignment": "icbt" },
+	{ "data-id": 13136, "value": 5490, "lc": "RAJARATA", "name": "IDM Nations Campus", "alignment": "idm" },
+	{ "data-id": 38665, "value": 2188, "lc": "SLIIT", "name": "IMBS Green Campus", "alignment": "imbs" },
+	{ "data-id": 10232, "value": 2204, "lc": "KANDY", "name": "Imperial College", "alignment": "imperial_college" },
+	{
+		"data-id": 7997,
+		"value": 872,
+		"lc": "CN",
+		"name": "Informatics Institute of Technology (IIT)",
+		"alignment": "iit"
+	},
+	{ "data-id": 11121, "value": 4535, "lc": "NIBM", "name": "Institute of Chemistry Ceylon", "alignment": "icc" },
+	{
+		"data-id": 13078,
+		"value": 222,
+		"lc": "CC",
+		"name": "Institute of Universal Higher Studies",
+		"alignment": "iusl"
+	},
+	{
+		"data-id": 38662,
+		"value": 2204,
+		"lc": "KANDY",
+		"name": "Java Institute For Advanced Technology",
+		"alignment": "java_institute"
+	},
+	{
+		"data-id": 13400,
+		"value": 222,
+		"lc": "CC",
+		"name": "KAATSU International University",
+		"alignment": "kaatsu_intl_uni"
+	},
+	{ "data-id": 10231, "value": 1340, "lc": "CS", "name": "Kotelawala Defence University", "alignment": "kdu" },
+	{
+		"data-id": 38660,
+		"value": 872,
+		"lc": "CN",
+		"name": "Mahaweli National College of Education",
+		"alignment": "mnce"
+	},
+	{
+		"data-id": 14179,
+		"value": 4535,
+		"lc": "NIBM",
+		"name": "National Institute of Business Management (NIBM)",
+		"alignment": "nibm"
+	},
+	{
+		"data-id": 11116,
+		"value": 872,
+		"lc": "CN",
+		"name": "National Institute of Social Development (NISD)",
+		"alignment": "nisd"
+	},
+	{
+		"data-id": 11126,
+		"value": 4535,
+		"lc": "NIBM",
+		"name": "Nawaloka College of Higher Studies",
+		"alignment": "nawaloka_college"
+	},
+	{
+		"data-id": 10226,
+		"value": 872,
+		"lc": "CN",
+		"name": "Northshore College of Business & Technology",
+		"alignment": "ncbt"
+	},
+	{
+		"data-id": 38664,
+		"value": 4535,
+		"lc": "NIBM",
+		"name": "Oxford College of Business Sri Lanka",
+		"alignment": "ocbsl"
+	},
+	{ "data-id": 8722, "value": 222, "lc": "CC", "name": "Royal Institute of Colombo", "alignment": "ric" },
+	{ "data-id": 11127, "value": 1340, "lc": "CS", "name": "Sabaragamuwa University", "alignment": "susl" },
+	{ "data-id": 11570, "value": 221, "lc": "USJ", "name": "Saegis Campus", "alignment": "saegis" },
+	{ "data-id": 39484, "value": 222, "lc": "CC", "name": "SLIIT Kandy UNI", "alignment": "sliit_ku" },
+	{
+		"data-id": 11108,
+		"value": 222,
+		"lc": "CC",
+		"name": "Sri Lanka Institute of Advanced Technological Education (SLIATE)",
+		"alignment": "sliate"
+	},
+	{ "data-id": 13077, "value": 222, "lc": "CC", "name": "Sri Lanka Institute of Marketing", "alignment": "slim" },
+	{
+		"data-id": 38659,
+		"value": 222,
+		"lc": "CC",
+		"name": "Sri Lanka Institute of Tourism & Hotel Management (SLITHM)",
+		"alignment": "slithm"
+	},
+	{ "data-id": 13106, "value": 1340, "lc": "CS", "name": "Sri Lanka Technological Campus", "alignment": "sltc" },
+	{
+		"data-id": 13368,
+		"value": 1340,
+		"lc": "CS",
+		"name": "St. George International Teacher Training Institute",
+		"alignment": "st_george"
+	},
+	{
+		"data-id": 13108,
+		"value": 1340,
+		"lc": "CS",
+		"name": "The Open University of Sri Lanka",
+		"alignment": "open_uni"
+	},
+	{ "data-id": 13086, "value": 222, "lc": "CC", "name": "Universal College Lanka (UCL)", "alignment": "ucl" },
+	{ "data-id": 11136, "value": 2204, "lc": "KANDY", "name": "University of Jaffna", "alignment": "jaffna" },
+	{ "data-id": 37260, "value": 2204, "lc": "KANDY", "name": "University of Vavuniya", "alignment": "vavuniya" },
+	{ "data-id": 11119, "value": 872, "lc": "CN", "name": "Uva Wellassa University", "alignment": "uwu" },
+	{ "data-id": 13990, "value": 221, "lc": "USJ", "name": "Wayamba University of Sri Lanka", "alignment": "wayamba" },
+	{ "data-id": 11128, "value": 221, "lc": "USJ", "name": "Wisdom Business Academy", "alignment": "wisdom" },
+	{ "data-id": 7675, "value": 1821, "lc": "Other", "name": "Other", "alignment": "other" }
 ]

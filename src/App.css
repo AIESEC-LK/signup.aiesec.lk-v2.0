@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+p:before {
+	content: " ";
+	white-space: pre;
+}
+
+p {
+	font-size: 12px;
+}
