@@ -182,7 +182,7 @@ const ProductSignUp = (props) => {
 		let combinedData = { ...extractedParams, ...formD };
 		const sendDataToSheet = async () => {
 			const url =
-				"https://script.google.com/macros/s/AKfycby1UjBdN7R_p1Wam_gN9NlXJeIKH29po0PUrc0hmcDMmDL4hxEVwFQwxsAof0LN7_R6dw/exec";
+				"https://script.google.com/macros/s/AKfycbyguZPcMmLAteUr5pkW-qXtJQhoE6UXlbp-0h3v2F0t6Wn1zaCha591MaggEeWblECQww/exec";
 			combinedData.url = window.location.href;
 
 			try {
