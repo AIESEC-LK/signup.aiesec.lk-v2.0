@@ -160,7 +160,7 @@ const ProductSignUp = (props) => {
 		console.log("first");
 		setSubmitState(true);
 		const selectedProgramme =
-			props.product === "GV" ? 7 : props.product === "GTe" ? 8 : props.product === "GTa" ? 9 : 7;
+			props.product === "GV" ? 7 : props.product === "GTe" ? 9 : props.product === "GTa" ? 8 : 7;
 
 		const extractedParams = {};
 		for (const [key, value] of queryParams?.entries()) {
