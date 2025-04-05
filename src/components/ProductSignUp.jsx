@@ -65,7 +65,7 @@ const SuccessModal = ({ onClose }) => {
 			document.body.style.overflow = "auto";
 		};
 	}, []);
-
+	window.fbq("track", "Lead");
 	return (
 		<div className={`fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center`}>
 			<div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
