@@ -17,8 +17,8 @@ import { CheckCircleIcon, LifebuoyIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 import { useForm, Controller } from "react-hook-form";
 // import ReCAPTCHA from "react-google-recaptcha";
-
 import * as yup from "yup";
+
 let recaptchaInstance;
 const executeCaptcha = (e) => {
 	e.preventDefault();
@@ -57,6 +57,8 @@ const schema = yup
 		// captcha: yup.string().required("Please complete the captcha", { nullable: false }),
 	})
 	.required("Data is required");
+
+// signup success message
 const SuccessModal = ({ onClose }) => {
 	useEffect(() => {
 		document.body.style.overflow = "hidden";
@@ -87,6 +89,7 @@ const SuccessModal = ({ onClose }) => {
 	);
 };
 
+// signup failed message
 const FailModal = ({ onClose, messageTitle, messageContent }) => {
 	useEffect(() => {
 		document.body.style.overflow = "hidden";
@@ -198,29 +201,10 @@ const ProductSignUp = (props) => {
 				console.error("Error sending data:", error);
 			}
 		};
-		// contact number validity check
-		// const contactNumberRegex = /^[0-9]{9}$/;
-		// if (!contactNumberRegex.test(formData.contactNumber)) {
-		// 	setMessageTitle("Incorrect Contact Number.");
-		// 	setMessageContent("Please enter a valid 10-digit contact number. In the format: 712345678");
-		// 	setShowFailedModal(true);
-		// 	return;
-		// }
 
-		// password strength check
-		// const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
-		// if (!passwordRegex.test(formData.password)) {
-		// 	setMessageTitle("Password requirements not met.");
-		// 	setMessageContent(
-		// 		"Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
-		// 	);
-		// 	setShowFailedModal(true);
-		// 	return;
-		// }
-
-		// should default to GV
-		console.log(data.alignmentId);
-		console.log(alignment.find((item) => item["data-id"] == data.alignmentId)?.value || 1821);
+		// console.log(data.alignmentId);
+		// console.log(alignment.find((item) => item["data-id"] == data.alignmentId)?.value || 1821);
+		// data sending to expa
 		const payload = {
 			user: {
 				first_name: data.firstName,
