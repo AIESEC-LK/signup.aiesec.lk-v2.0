@@ -1,0 +1,31 @@
+name: Deploy signup.aiesec.lk-v2.0
+
+on:
+  push:
+    branches: ["release"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AZURE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.AZURE_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Azure VM
+        run: |
+          ssh ${{ secrets.AZURE_USER }}@${{ secrets.AZURE_HOST }} << 'EOF'
+            cd ${{ secrets.DEPLOY_PATH }}
+            git checkout release
+            git pull
+            npm install
+            npm run build
+            pm2 restart signupV2 || pm2 start npm --name "signupV2" -- run preview
+          EOF
