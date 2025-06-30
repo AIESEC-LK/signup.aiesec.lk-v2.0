@@ -57,5 +57,6 @@
 	{ "data-id": 11119, "value": 872, "lc": "CN", "name": "Uva Wellassa University", "alignment": "uwu" },
 	{ "data-id": 13990, "value": 221, "lc": "USJ", "name": "Wayamba University of Sri Lanka", "alignment": "wayamba" },
 	{ "data-id": 11128, "value": 221, "lc": "USJ", "name": "Wisdom Business Academy", "alignment": "wisdom" },
+	{ "data-id": 39880, "value": 1340, "lc": "CS", "name": "Horizon Campus", "alignment": "horizon_campus" },
 	{ "data-id": 7675, "value": 1821, "lc": "Other", "name": "Other", "alignment": "mc" }
 ]
