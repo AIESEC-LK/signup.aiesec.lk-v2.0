@@ -7,7 +7,7 @@
 	{ "data-id": 7672, 	"value": 2175, "lc": "RUHUNA", "name": "University of Ruhuna", "alignment": "ruhuna"},
 	{ "data-id": 7673, "value": 2188, "lc": "SLIIT", "name": "SLIIT", "alignment": "sliit" },
 	{ "data-id": 7674, "value": 2186, "lc": "NSBM", "name": "NSBM Green University", "alignment": "nsbm" },
-	{ "data-id": 13991, "value": 5490,	"lc": "RAJARATA", "name": "Rajarata University of Sri Lanka","alignment": "rajarata" },
+	{ "data-id": 13991, "value": 5490, "lc": "RAJARATA", "name": "Rajarata University of Sri Lanka","alignment": "rajarata" },
 	{ "data-id": 11124, "value": 1340, "lc": "CS", "name": "Academy of Design", "alignment": "academy_of_design" },
 	{ "data-id": 11125, "value": 1340, "lc": "CS", "name": "AMDT School of Creativity", "alignment": "amdt" },
 	{ "data-id": 13139, "value": 2175, "lc": "RUHUNA", "name": "Apex Business Academy", "alignment": "apex" },
