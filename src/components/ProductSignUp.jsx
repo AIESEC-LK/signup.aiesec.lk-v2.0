@@ -169,8 +169,10 @@ const ProductSignUp = (props) => {
 
 		// Function to send data to Google Sheet
 		const sendDataToSheet = async () => {
-			const url =
-				"https://script.google.com/macros/s/AKfycbyguZPcMmLAteUr5pkW-qXtJQhoE6UXlbp-0h3v2F0t6Wn1zaCha591MaggEeWblECQww/exec";
+			const url = "https://script.google.com/macros/s/AKfycbwN-rXEMbmYf9KhJH5zao3aXqL1BgERsE2u_w2jvD9NPe2DkfIntK8xk6lmKfpcIj3-Jg/exec";
+				
+				//"https://script.google.com/macros/s/AKfycbyguZPcMmLAteUr5pkW-qXtJQhoE6UXlbp-0h3v2F0t6Wn1zaCha591MaggEeWblECQww/exec";
+			
 			combinedData.url = window.location.href;
 
 			try {
