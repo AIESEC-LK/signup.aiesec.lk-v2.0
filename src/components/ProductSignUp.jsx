@@ -143,6 +143,11 @@ const ProductSignUp = (props) => {
 
 	// Extracted form submission logic to a separate function
 	const onSubmit = async (data) => {
+			console.log("test");
+		console.log("Form submitted with data:", data);
+	
+		
+		
 		setSubmitState(true);
 
 		const selectedProgramme =
@@ -185,6 +190,8 @@ const ProductSignUp = (props) => {
 				});
 				if (response.ok) {
 					console.log("Data sent to sheet");
+					console.log("data is ", data);
+					
 				} else {
 					console.log("Error sending data to sheet:", JSON.stringify(response));
 				}
