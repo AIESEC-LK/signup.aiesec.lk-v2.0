@@ -143,7 +143,7 @@ const ProductSignUp = (props) => {
 
 	// Extracted form submission logic to a separate function
 	const onSubmit = async (data) => {
-		console.log("data is",data);
+		
 		setSubmitState(true);
 
 		const selectedProgramme =
