@@ -144,8 +144,10 @@ const ProductSignUp = (props) => {
 	// Extracted form submission logic to a separate function
 	const onSubmit = async (data) => {
 
-			console.log("test");
-		console.log("Form submitted with data:", data);
+			
+
+
+		
 	
 		
 
@@ -192,7 +194,7 @@ const ProductSignUp = (props) => {
 				});
 				if (response.ok) {
 					console.log("Data sent to sheet");
-					console.log("data is ", data);
+					
 					
 				} else {
 					console.log("Error sending data to sheet:", JSON.stringify(response));
@@ -222,9 +224,7 @@ const ProductSignUp = (props) => {
 		};
 
 		try {
-			console.log("form submited with data", data);
-			
-			console.log("Submitting form with payload:", payload);
+	
 			
 			const res = await axios.post(
 				"https://auth.aiesec.org/users.json",
