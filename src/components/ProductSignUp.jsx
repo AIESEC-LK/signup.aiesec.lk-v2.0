@@ -213,6 +213,10 @@ const ProductSignUp = (props) => {
 		};
 
 		try {
+			console.log("form submited with data", data);
+			
+			console.log("Submitting form with payload:", payload);
+			
 			const res = await axios.post(
 				"https://auth.aiesec.org/users.json",
 				payload,
