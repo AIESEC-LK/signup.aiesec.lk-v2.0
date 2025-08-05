@@ -411,15 +411,24 @@ const ProductSignUp = (props) => {
 						<div></div>
 
 						<div className="col-start-1">
-							<div className="flex items-center">
+							<div className="flex items-center flex-nowrap">
 								<input
 									type="checkbox"
 									{...register("permission")}
-									className="focus:outline-none mr-2 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+									className="focus:outline-none mr-2 h-4 text-indigo-600 rounded focus:ring-indigo-500 flex-shrink-0"
 								/>
-								<span className="text-gray-700">
-                  I give permission to be contacted by phone/email.
-                </span>
+								<span className="text-gray-700 whitespace-nowrap">
+									I have read and agree to AIESEC Sri Lanka's {" "}
+									<a
+										href="https://aiesec.lk/privacy-and-cookie-policy"
+										target="_blank"
+										rel="noopener noreferrer"
+										style={{ color: "#0cb9c1" }}
+									>
+										Privacy Policy
+									</a>{" "}
+									 and I may be contacted by AIESEC representatives for further processing.
+								</span>
 							</div>
 							<p className="text-red-500 my-1">{errors.permission?.message || " "} </p>
 						</div>
