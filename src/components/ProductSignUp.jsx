@@ -36,7 +36,7 @@ const SuccessModal = ({ onClose }) => {
         <h1 className="text-3xl text-green-500 font-semibold mb-4">Success!</h1>
 
         <h2 className="text-2xl text-black font-semibold mb-4">
-          Thank you for signing.
+          Thank you for Signing Up.
         </h2>
         <p className="text-black mb-6">
           One of our team members will contact you soon.
@@ -138,6 +138,7 @@ const ProductSignUp = (props) => {
     charCount: false,
     case: false,
     specialChar: false,
+    number: false,
   });
   const togglePasswordVisibility = (event) => {
     event.preventDefault();
@@ -156,6 +157,8 @@ const ProductSignUp = (props) => {
         charCount: value.length >= 8,
         case: /[a-z]/.test(value) && /[A-Z]/.test(value),
         specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+        number: /\d/.test(formData.password),
+
       });
     }
   };
@@ -203,7 +206,7 @@ const ProductSignUp = (props) => {
     const serializedData = urlEncodedData.toString();
     const sendDataToSheet = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycbxHeDJzbqcesFclJ7DubM9RL2gEdpvvXreRNXmaSGqMPsnkF7-VS2VevEEqwJsv_tH2gA/exec";
+        "https://script.google.com/macros/s/AKfycbyF3d5jX3prEYuHjCjCXSHPYDaBqOUlcyFPp45Uiz78QX9hcfCrmGolg2zfmNZ8XkiImg/exec";
         combinedData.url = window.location.href; 
       
 
@@ -216,9 +219,9 @@ const ProductSignUp = (props) => {
           body: new URLSearchParams(combinedData),
         });
         const responseText = await response.text();
-        // if (response.ok) {
-        //   alert("Data sent successfully: " + responseText);
-        // }
+        if (!response.ok) throw new Error(`Sheet POST failed: ${response.status}, ${responseText}`);
+        console.log("Sheet response:", responseText);
+
       } catch (error) {
         console.error("Error sending data:", error);
         // alert("error sending data please try again.");
@@ -236,7 +239,7 @@ const ProductSignUp = (props) => {
       return;
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{8,}).*$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?=.{8,}).*$/;
     if (!passwordRegex.test(formData.password)) {
       setMessageTitle("Password requirements not met.");
       setMessageContent(
@@ -282,8 +285,8 @@ const ProductSignUp = (props) => {
     };
     try {
       const res = await axios.post(
-        "https://auth.aiesec.org/users.json", // use this for production
-        // "https://auth-staging.aiesec.org/users.json", // use this for testing
+        // "https://auth.aiesec.org/users.json", // use this for production
+        "https://auth-staging.aiesec.org/users.json", // use this for testing
         // "http://localhost:3000/api/users",   // use this for testing
         payload,
         {
@@ -292,11 +295,21 @@ const ProductSignUp = (props) => {
           },
         }
       );
-      console.log("Email notification sent!");
+      console.log("Email notification sent/data sent to expa");
+      console.log("combined data",combinedData);
       if (Object.keys(combinedData).length !== 0) {
         await sendDataToSheet();
+        setShowSuccessModal(true);
+        console.log("data sent to sheet")
+      }else{
+        setMessageTitle("Sign up failed");
+        setMessageContent(`sign up not completed`);
+        setShowFailedModal(true)
+        console.log("data not sent to sheet")
+
       }
-      setShowSuccessModal(true);
+
+      
     } catch (error) {
       console.log("Error during form submission:", error);
 
@@ -304,23 +317,27 @@ const ProductSignUp = (props) => {
         console.error("Error response:", error.response.data);
         console.error("Error status:", error.response.status);
         console.error("Error headers:", error.response.headers);
-      } else {
-        console.error("Error message:", error.message);
-      }
 
-      if (error.response?.data?.errors?.email[0] === "has already been taken") {
+      const errors = error.response?.data?.errors;
+      if (errors) {
+        const firstKey = Object.keys(errors)[0];
+        const firstMessage = errors[firstKey][0];
+        console.log("first key",firstKey);
+        console.log("firstMessage",firstMessage);
+        if (firstKey == "email" && firstMessage === "has already been taken") {
         setMessageTitle("Already registered.");
         setMessageContent(
           "The email address has already been taken. Please try again with a different email address."
         );
-        setShowFailedModal(true);
-      } else {
-        setMessageTitle("Network error.");
-        setMessageContent(
-          "An error occurred while submitting the form. Please try again."
-        );
+      }
         setShowFailedModal(true);
       }
+     
+
+      } else {
+        console.error("Error message:", error.message);
+      }
+
     }
   };
 
@@ -612,6 +629,9 @@ const ProductSignUp = (props) => {
                       <li className={requirementsMet.specialChar ? "met" : ""}>
                         Include a special character
                       </li>
+                      <li className={requirementsMet.number ? "met" : ""}>
+                 Include at least one number
+                  </li>
                     </ul>
                   </div>
                 </label>
