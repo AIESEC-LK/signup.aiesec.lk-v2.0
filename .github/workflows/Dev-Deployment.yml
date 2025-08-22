@@ -1,0 +1,35 @@
+name: Deploy signup.aiesec.lk-v2.0 Dev Environment
+
+on:
+  push:
+    branches: ["dev-release"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AZURE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.AZURE_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Azure VM Dev Environment
+        run: |
+          ssh ${{ secrets.AZURE_USER }}@${{ secrets.AZURE_HOST }} << 'EOF'
+            cd ${{ secrets.DEV_DEPLOY_PATH }}
+            git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/AIESEC-LK/signup.aiesec.lk-v2.0.git
+            git checkout dev-release
+            git pull
+            npm install
+            npm run build
+            pm2 stop signupV2-dev || true
+            pm2 delete signupV2-dev || true
+            pm2 start npm --name "signupV2-dev" -- run preview -- --port 3002 --host 0.0.0.0
+            
+          EOF
