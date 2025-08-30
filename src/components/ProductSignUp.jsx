@@ -100,7 +100,7 @@ const ProductSignUp = (props) => {
 		};
 		let combinedData = { ...extractedParams, ...formD };
 		const sendDataToSheet = () => {
-			const url = "https://script.google.com/macros/s/AKfycbwN-rXEMbmYf9KhJH5zao3aXqL1BgERsE2u_w2jvD9NPe2DkfIntK8xk6lmKfpcIj3-Jg/exec";
+			const url = "https://script.google.com/macros/s/AKfycbzLqkswIcRolT2e-UsVzsuTLwf53mk1UqAmvjQPCRpK9zyyVb3UkEp4Wgc33Da6ZAH51g/exec";
 			combinedData.url = window.location.href;
 			// Fire-and-forget with keepalive
 			fetch(url, {
