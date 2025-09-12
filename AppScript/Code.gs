@@ -1,3 +1,29 @@
+  let leadAlignmentDefult = "national";
+  const leadAlignmentData = [
+    { "alignment-id": 7673,"alignment": "sliit" },
+    { "alignment-id": 39880,"alignment": "horizon_campus" },
+    { "alignment-id": 13433,"alignment": "ruhuna" },
+    { "alignment-id": 39485,"alignment": "eusl" },
+    { "alignment-id": 7668,"alignment": "cn" },
+    { "alignment-id": 7670,"alignment": "usj" },
+    { "alignment-id": 13106,"alignment": "sltc" },
+    { "alignment-id": 13991,"alignment": "rajarata" },
+    { "alignment-id": 13990,"alignment": "wayamba" },
+    { "alignment-id": 14179,"alignment": "nibm" },
+    { "alignment-id": 7997,"alignment": "iit" },
+    { "alignment-id": 39484,"alignment": "sliit_ku" },
+    { "alignment-id": 7671,"alignment": "kandy" },
+    { "alignment-id": 7672,"alignment": "ruhuna" },
+    { "alignment-id": 10231,"alignment": "kdu" },
+    { "alignment-id": 11136,"alignment": "jaffna" },
+    { "alignment-id": 37260,"alignment": "vavuniya" },
+    { "alignment-id": 7674,"alignment": "nsbm" },
+    { "alignment-id": 7675,"alignment": "mc" },
+    { "alignment-id": 7669,"alignment": "cs" },
+    { "alignment-id": 7667,"alignment": "cc" },
+    { "alignment-id": 11570,"alignment": "saegis" }
+  ];
+
 function doOptions() {
   return ContentService.createTextOutput("")
     .setMimeType(ContentService.MimeType.TEXT)
@@ -11,7 +37,7 @@ function doOptions() {
  */
 function logToSheet(level, message, data) {
   try {
-    var spreadsheetId = "1K3tWDl7rTBwnHfZMdoqCbu_a3dOYju6XYSJENv5epVQ";
+    var spreadsheetId = "1F67OmuXEN_0NCk2Rl_fl9KJH7sAhO8uIbRHpDb2bspk";
     var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     var errorSheet = spreadsheet.getSheetByName("Errors");
     if (!errorSheet) {
@@ -32,14 +58,24 @@ function logToSheet(level, message, data) {
   }
 }
 
+const getAlignmentById = (id, dataArray) => {
+  const foundItem = dataArray.find(item => item["alignment-id"] === id);
+  return foundItem ? foundItem.alignment : leadAlignmentDefult;
+};
+
+
 function doPost(e) {
   logToSheet("INFO", "Entered doPost", null);
   try {
     logToSheet("INFO", "Received parameters", e.parameter);
     const params = e.parameter;
-    const entity = params.university ? params.university.toString().toLowerCase() : "national";
+    const leadAlignmentId = params.leadAlignment ? parseInt(params.leadAlignment, 10) : null;
+    let entity = leadAlignmentDefult;
+    if (leadAlignmentId !== null) {
+      entity = getAlignmentById(leadAlignmentId, leadAlignmentData);
+    }
     logToSheet("INFO", "Entity determined", entity);
-    const spreadsheetId = "1K3tWDl7rTBwnHfZMdoqCbu_a3dOYju6XYSJENv5epVQ";
+    const spreadsheetId = "1F67OmuXEN_0NCk2Rl_fl9KJH7sAhO8uIbRHpDb2bspk";
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     let sheet;
 
@@ -227,7 +263,7 @@ function doPost(e) {
  */
 function logError(requestData, error) {
   try {
-    const spreadsheetId = "1K3tWDl7rTBwnHfZMdoqCbu_a3dOYju6XYSJENv5epVQ";
+    const spreadsheetId = "1F67OmuXEN_0NCk2Rl_fl9KJH7sAhO8uIbRHpDb2bspk";
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
 
     // Get or create error sheet
@@ -263,6 +299,7 @@ function logError(requestData, error) {
 function testDoPost() {
   const e = {
     parameter: {
+      leadAlignment:'7667',
       university: 'cc',
       utm_source: 'Facebook',
       utm_medium: 'Blog',
@@ -270,6 +307,7 @@ function testDoPost() {
       utm_term: 'January.TeamA',
       utm_content: 'story',
       id: 'LK-test'
+
     }
   };
   doPost(e);
@@ -286,7 +324,7 @@ function testErrorHandling() {
   };
 
   // Force an error by using a non-existent spreadsheet ID
-  const originalSpreadsheetId = "1K3tWDl7rTBwnHfZMdoqCbu_a3dOYju6XYSJENv5epVQ";
+  const originalSpreadsheetId = "1F67OmuXEN_0NCk2Rl_fl9KJH7sAhO8uIbRHpDb2bspk";
 
   try {
     // This will intentionally cause an error - for testing only
