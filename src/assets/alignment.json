@@ -7,7 +7,7 @@
 	{ "data-id": 7670, "value": 221, "lc": "USJ", "name": "University of Sri Jayawardenepura", "alignment": "usj" },
 	{ "data-id": 13106, "value": 1340, "lc": "CS", "name": "Sri Lanka Technological Campus", "alignment": "sltc" },
 	{ "data-id": 13991, "value": 5490, "lc": "RAJARATA", "name": "Rajarata University of Sri Lanka", "alignment": "rajarata" },
-	{ "data-id": 13990, "value": 221, "lc": "USJ", "name": "Wayamba University of Sri Lanka", "alignment": "wayamba" },
+	{ "data-id": 40425, "value": 6710, "lc": "WAYAMBA", "name": "Wayamba University of Sri Lanka", "alignment": "wayamba" },
 	{ "data-id": 14179, "value": 4535, "lc": "NIBM", "name": "National Institute of Business Management (NIBM)", "alignment": "nibm" },
 	{ "data-id": 7997, "value": 872, "lc": "CN", "name": "Informatics Institute of Technology (IIT)", "alignment": "iit" },
 	{ "data-id": 39484, "value": 222, "lc": "CC", "name": "SLIIT Kandy UNI", "alignment": "sliit_ku" },
