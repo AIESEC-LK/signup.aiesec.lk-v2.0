@@ -43,6 +43,7 @@ const schema = yup
 			}),
 		howFoundUs: yup.string().required("Referral is required"),
 		permission: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+		additionalPermission: yup.boolean().oneOf([true], "You must accept to be contacted"),
 		alignmentId: yup.string().required("Your educational institution is required"),
 	})
 	.required("Data is required");
@@ -58,7 +59,7 @@ const SuccessModal = ({ onClose }) => {
 	}, []);
 
 	return (
-		<div className="fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center">
+		<div className="fixed inset-0 z-50 bg-opacity-90 bg-gray-950 flex items-center justify-center ">
 			<div className="bg-white p-8 rounded-lg shadow-lg max-w-sm text-center">
 				<center>
 					<CheckCircleIcon className="size-20 text-green-500 mb-4" />
@@ -285,7 +286,7 @@ const ProductSignUp = (props) => {
 
 	return (
 		<div
-			className="-z-50 w-full bg-cover bg-center bg-no-repeat"
+			className="-z-50 w-full bg-cover bg-center bg-no-repeat overflow-x-clip"
 			style={{
 				backgroundImage: `url(${bg})`,
 				backgroundSize: "cover",
@@ -425,18 +426,40 @@ const ProductSignUp = (props) => {
 
 						<div></div>
 
-						<div className="col-start-1">
-							<div className="flex items-center">
+						<div className="col-start-1 space-y-3">
+							<div className="flex items-start">
 								<input
 									type="checkbox"
 									{...register("permission")}
-									className="focus:outline-none mr-2 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+									className="focus:outline-none mr-2 mt-1 h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500 flex-shrink-0"
 								/>
-								<span className="text-gray-700">
-                  I give permission to be contacted by phone/email.
-                </span>
+								<span className="text-gray-700 text-sm md:whitespace-nowrap">
+									I have read and agree to AIESEC Sri Lanka's {" "}
+									<a
+										href="https://aiesec.lk/privacy-and-cookie-policy"
+										target="_blank"
+										rel="noopener noreferrer"
+										style={{ color: "#0cb9c1" }}
+										className="underline hover:no-underline"
+									>
+										Privacy Policy
+									</a>{" "}
+									and I may be contacted by AIESEC representatives for further processing.
+								</span>
 							</div>
-							<p className="text-red-500 my-1">{errors.permission?.message || " "} </p>
+							<p className="text-red-500 text-sm">{errors.permission?.message || " "} </p>
+
+							<div className="flex items-start">
+								<input
+									type="checkbox"
+									{...register("additionalPermission")}
+									className="focus:outline-none mr-2 mt-1 h-4 w-4 text-indigo-600 rounded focus:ring-indigo-500 flex-shrink-0"
+								/>
+								<span className="text-gray-700 text-sm md:whitespace-nowrap">
+									I give permission to be contacted by phone/email.
+								</span>
+							</div>
+							<p className="text-red-500 text-sm">{errors.additionalPermission?.message || " "} </p>
 						</div>
 					</div>
 
