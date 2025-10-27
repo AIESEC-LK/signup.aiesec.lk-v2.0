@@ -218,11 +218,13 @@ const ProductSignUp = (props) => {
 				alignment_id: data.alignmentId,
 				lc: alignment.find((item) => item["data-id"] == data.alignmentId)?.value || 1821,
 				referral_type: data.howFoundUs || "Other",
-				allow_phone_communication: 1,
+				allow_phone_communication: "1",
 				allow_email_communication: data.permission,
 				selected_programmes: [selectedProgramme],
 			},
 		};
+
+	
 
 		try {
 	
