@@ -219,7 +219,7 @@ const ProductSignUp = (props) => {
 				lc: alignment.find((item) => item["data-id"] == data.alignmentId)?.value || 1821,
 				referral_type: data.howFoundUs || "Other",
 				allow_phone_communication: data.permission,
-				allow_email_communication: data.permission,
+				allow_email_communication: 1,
 				selected_programmes: [selectedProgramme],
 			},
 		};
