@@ -42,6 +42,7 @@ const schema = yup
 				return originalValue;
 			}),
 		permission: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+		additionalPermission: yup.boolean().oneOf([true], "You must accept to be contacted"),
 		alignmentId: yup.string().required("Your educational institution is required"),
 	})
 	.required("Data is required");
@@ -126,7 +127,7 @@ const ProductSignUp = (props) => {
 				alignment_id: data.alignmentId,
 				lc: alignment.find((item) => String(item["data-id"]) === String(data.alignmentId))?.value || 1821,
 				referral_type: data.howFoundUs || "Other",
-				allow_phone_communication: data.permission,
+				allow_phone_communication: "1",
 				allow_email_communication: data.permission,
 				selected_programmes: [selectedProgramme],
 			},
@@ -159,7 +160,7 @@ const ProductSignUp = (props) => {
 
 	return (
 		<div
-			className="-z-50 w-full bg-cover bg-center bg-no-repeat"
+			className="-z-50 w-full bg-cover bg-center bg-no-repeat overflow-x-clip"
 			style={{
 				backgroundImage: `url(${bg})`,
 				backgroundSize: "cover",
