@@ -14,6 +14,8 @@ import ProductSignUpForm from "./ProductSignUp/ProductSignUpForm";
 import SuccessModal from "./ProductSignUp/SuccessModal";
 import FailModal from "./ProductSignUp/FailModal";
 
+const AppScriptURL = import.meta.env.VITE_APP_SCRIPT_URL;
+
 // Validation schema outside component
 const schema = yup
 	.object({
@@ -100,7 +102,7 @@ const ProductSignUp = (props) => {
 		};
 		let combinedData = { ...extractedParams, ...formD };
 		const sendDataToSheet = () => {
-			const url = "https://script.google.com/macros/s/AKfycbzLqkswIcRolT2e-UsVzsuTLwf53mk1UqAmvjQPCRpK9zyyVb3UkEp4Wgc33Da6ZAH51g/exec";
+			const url = AppScriptURL;
 			combinedData.url = window.location.href;
 			// Fire-and-forget with keepalive
 			fetch(url, {
