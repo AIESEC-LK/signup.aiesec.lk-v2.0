@@ -1,27 +1,26 @@
 import "./App.css";
 import SignUp from "./pages/SignUp";
-import {Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProductSignUp from "./components/ProductSignUp";
 import LoadingScreen from "./components/LoadingScreen";
 //import SampleEmail from "./components/SampleEmail";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
-  return (
-    <div className="App">
-
-        <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/teach" element={<ProductSignUp product= "GTe" />} />
-          <Route path="/volunteer" element={ <ProductSignUp product= "GV" />} />
-          <Route path="/intern" element={ <ProductSignUp product= "GTa" />} />
-          <Route path="/loading" element={ <LoadingScreen />} />
-
-          {/*<Route path="/sampleEmail" element={ <SampleEmail />} />*/} {/* ##################### REMOVE THIS ROUTE AFTER TESTING #############################*/}
-          
-        </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/" element={<SignUp />} />
+				<Route path="/teach" element={<ProductSignUp product="GTe" />} />
+				<Route path="/volunteer" element={<ProductSignUp product="GV" />} />
+				<Route path="/intern" element={<ProductSignUp product="GTa" />} />
+				<Route path="/loading" element={<LoadingScreen />} />
+				<Route path="/*" element={<SignUp />} />
+				{/*<Route path="/sampleEmail" element={ <SampleEmail />} />*/}{" "}
+				{/* ##################### REMOVE THIS ROUTE AFTER TESTING #############################*/}
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
