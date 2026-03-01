@@ -1,0 +1,58 @@
+name: Deploy_Using_Docker_Hub_Test
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/asldevteam:signuptest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.AZURE_SSH_TEST }}
+
+      - name: Add SSH known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.AZURE_HOST_TEST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Azure VM
+        run: |
+          ssh ${{ secrets.AZURE_USER_TEST }}@${{ secrets.AZURE_HOST_TEST }} << 'EOF'
+            cd ${{ secrets.SCRIPTS_PATH }}
+            export APP=${{ secrets.DOCKERHUB_USERNAME }}/asldevteam
+            export HOSTPORT=5001
+            export TEMP_PORT=7071
+            export CONTAINERPORT=80
+            export TAG=signuptest
+
+            ./deploy.sh || exit 1
+          EOF
