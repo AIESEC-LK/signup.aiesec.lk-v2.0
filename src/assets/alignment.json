@@ -20,5 +20,6 @@
 	{ "data-id": 7675, "value": 1821, "lc": "Other", "name": "Other", "alignment": "mc" },
 	{ "data-id": 7669, "value": 1340, "lc": "CS", "name": "University of Moratuwa", "alignment": "cs" },
 	{ "data-id": 7667, "value": 222, "lc": "CC", "name": "University of Colombo", "alignment": "cc" },
-	{ "data-id": 11570, "value": 221, "lc": "USJ", "name": "Saegis  Campus", "alignment": "saegis" }
+	{ "data-id": 11570, "value": 221, "lc": "USJ", "name": "Saegis  Campus", "alignment": "saegis" },
+	{ "data-id": 40465, "value": 2188, "lc": "SLIIT", "name": "CINEC Campus", "alignment": "cinec"}  
 ]
