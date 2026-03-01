@@ -2,7 +2,7 @@ name: Deploy_Using_Docker_Hub
 
 on:
   push:
-    branches: ["release"]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:

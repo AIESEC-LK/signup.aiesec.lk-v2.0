@@ -2,7 +2,7 @@ name: Deploy_Using_Docker_Hub_Test
 
 on:
   push:
-    branches: ["main"]
+    branches: ["test"]
   workflow_dispatch:
 
 jobs:
