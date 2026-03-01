@@ -28,6 +28,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/asldevteam:signup
+          build-args: |
+            VITE_APP_SCRIPT_URL=${{ secrets.VITE_APP_SCRIPT_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
