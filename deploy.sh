@@ -39,7 +39,7 @@ handle_error() {
   # Cleanup any temporary containers/images on failure
   echo "[INFO] Performing cleanup due to failure..."
   docker rm -f ${TAG}-new 2>/dev/null || true
-  docker rmi $APP:new 2>/dev/null || true
+  docker rmi $APP:${TAG}-new 2>/dev/null || true
   
   # Return error to caller
   return $exit_code
@@ -74,8 +74,8 @@ fi
 
 # 2. Retag the new image as "new"
 echo "[INFO] Retagging image as new..."
-if ! docker tag $APP:$TAG $APP:new; then
-  handle_error "Failed to tag image $APP:$TAG as $APP:new"
+if ! docker tag $APP:$TAG $APP:${TAG}-new; then
+  handle_error "Failed to tag image $APP:$TAG as $APP:${TAG}-new"
   exit 1
 fi
 
@@ -84,7 +84,7 @@ docker rmi $APP:$TAG || true
 
 # 3. Run new container on temp port
 echo "[INFO] Starting new container on temp port..."
-if ! run_container_with_env "${TAG}-new" "${TEMP_PORT}" "${CONTAINERPORT}" "$APP:new"; then
+if ! run_container_with_env "${TAG}-new" "${TEMP_PORT}" "${CONTAINERPORT}" "$APP:${TAG}-new"; then
   handle_error "Failed to start new container on temp port"
   exit 1
 fi
@@ -100,10 +100,11 @@ for i in {1..10}; do
       echo "[INFO] Stopping old container..."
       docker stop ${TAG}-current || true
       if [ "$(docker ps -aq -f name=${TAG}-old)" ]; then
+        docker stop ${TAG}-old || true
         docker rm ${TAG}-old || true
       fi
       docker rename ${TAG}-current ${TAG}-old || true
-      docker rmi $APP:old || true
+      docker rmi $APP:${TAG}-old || true
     fi
 
     # Switch new container to production port
@@ -113,7 +114,7 @@ for i in {1..10}; do
       exit 1
     fi
     
-    if ! run_container_with_env "${TAG}-current" "${HOSTPORT}" "${CONTAINERPORT}" "$APP:new"; then
+    if ! run_container_with_env "${TAG}-current" "${HOSTPORT}" "${CONTAINERPORT}" "$APP:${TAG}-new"; then
       handle_error "Failed to start production container on port ${HOSTPORT}"
       # Try to restart the old container if it exists
       if [ "$(docker ps -aq -f name=${TAG}-old)" ]; then
@@ -125,12 +126,12 @@ for i in {1..10}; do
     
     docker rm ${TAG}-new || true
     
-    if ! docker tag $APP:new $APP:current; then
+    if ! docker tag $APP:${TAG}-new $APP:${TAG}-current; then
       echo "[WARN] Failed to tag image as current, but container is running"
     fi
 
     # Clean up
-    docker rmi $APP:new || true
+    docker rmi $APP:${TAG}-new || true
     echo "[SUCCESS] Deployment completed successfully!"
     exit 0
   fi

@@ -22,6 +22,10 @@ COPY . .
 
 ENV NODE_ENV=production
 
+# Build-time env var for Vite (baked into the JS bundle)
+ARG VITE_APP_SCRIPT_URL
+ENV VITE_APP_SCRIPT_URL=$VITE_APP_SCRIPT_URL
+
 # Build the application
 RUN echo "Starting build process..." && \
     echo "Current directory: $(pwd)" && \
