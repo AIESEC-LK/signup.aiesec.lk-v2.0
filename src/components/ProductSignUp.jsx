@@ -143,6 +143,9 @@ const ProductSignUp = (props) => {
 			}
 			setSubmitState(false);
 			setShowSuccessModal(true);
+			setTimeout(() => {
+				window.location.replace("https://aiesec.lk");
+			}, 1500);
 		} catch (error) {
 			setSubmitState(false);
 			if (error.response?.data?.errors?.email?.[0] === "has already been taken") {
