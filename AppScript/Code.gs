@@ -182,7 +182,7 @@ function doPost(e) {
         break;
 
       case "sliit_ku":
-        sheet = spreadsheet.getSheetByName("slitt_ku");
+        sheet = spreadsheet.getSheetByName("sliit_ku");
         break;
 
       case "kdu":
